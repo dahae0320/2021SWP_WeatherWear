@@ -9,126 +9,136 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="102.665dp"
-            android:layout_height="50dp"
-            android:paddingLeft="22dp"
-            android:paddingTop="13dp"
-            android:text="오후 3시"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="22dp"
-            tools:layout_editor_absoluteY="50dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="102.665dp"
-            android:layout_height="50dp"
-            android:paddingLeft="22dp"
-            android:paddingTop="13dp"
-            android:text="오후 5시"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="123dp"
-            tools:layout_editor_absoluteY="50dp" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="102.665dp"
-            android:layout_height="50dp"
-            android:paddingLeft="22dp"
-            android:paddingTop="13dp"
-            android:text="오후 7시"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="220dp"
-            tools:layout_editor_absoluteY="50dp" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="102.665dp"
-            android:layout_height="50dp"
-            android:paddingLeft="22dp"
-            android:paddingTop="13dp"
-            android:text="오후 9시"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="317dp"
-            tools:layout_editor_absoluteY="50dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp">
+        android:id="@+id/layoutBeforeBunch"
+        android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="99.5dp"
-            android:layout_height="60dp"
-            android:background="#36F4DB00"
-            android:paddingTop="15dp"
-            android:text="         'C"
-            android:textSize="24sp"
-            app:drawableTint="#F8E85F" />
+       <LinearLayout
+           android:id="@+id/layoutBefore1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:layout_margin="10dp">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/txtBeforeTime1"
+               android:padding="10dp"
+               android:text="오후 3시"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/txtBeforeCelsius1"
+               android:paddingTop="10dp"
+               android:paddingBottom="10dp"
+               android:paddingLeft="20dp"
+               android:paddingRight="20dp"
+               android:background="#80FFEB3B"
+               android:text="16°C" />
+       </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="99.5dp"
-            android:layout_height="60dp"
-            android:background="#36F4DB00"
-            android:paddingTop="15dp"
-            android:text="         'C"
-            android:textSize="24sp"
-            app:drawableTint="#F8E85F" />
+        <LinearLayout
+            android:id="@+id/layoutBefore2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeTime2"
+                android:padding="10dp"
+                android:text="오후 3시"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeCelsius2"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="#80FFEB3B"
+                android:text="16°C" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="99.5dp"
-            android:layout_height="60dp"
-            android:background="#36F4DB00"
-            android:paddingTop="15dp"
-            android:text="         'C"
-            android:textSize="24sp"
-            app:drawableTint="#F8E85F" />
+        <LinearLayout
+            android:id="@+id/layoutBefore3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeTime3"
+                android:padding="10dp"
+                android:text="오후 3시"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeCelsius3"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="#80FFEB3B"
+                android:text="16°C" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="99.5dp"
-            android:layout_height="60dp"
-            android:background="#36F4DB00"
-            android:paddingTop="15dp"
-            android:text="         'C"
-            android:textSize="24sp"
-            app:drawableTint="#F8E85F" />
+        <LinearLayout
+            android:id="@+id/layoutBefore4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeTime4"
+                android:padding="10dp"
+                android:text="오후 3시"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeCelsius4"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="#80FFEB3B"
+                android:text="16°C" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="164dp"
-            android:layout_height="115dp"
-            android:text="현재 시각 오후 1시"
-            android:textSize="36sp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="현재 시각\n 오후 1시"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="164dp"
-            android:layout_height="115dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="#FFEB3B"
-            android:text="         'C"
+            android:padding="20dp"
+            android:text="22'C"
             android:textSize="40sp" />
     </LinearLayout>
 
@@ -136,7 +146,7 @@
         android:id="@+id/textView1"
         android:layout_width="326dp"
         android:layout_height="51dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="#80FFEB3B"
         android:textColorHighlight="#B62A2A" />
 
