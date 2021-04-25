@@ -14,28 +14,31 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp">
-
         <Button
             android:id="@+id/btnOuter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아우터" />
-
         <Button
             android:id="@+id/btnTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="상의" />
-
         <Button
             android:id="@+id/btnBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="하의" />
-
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_container"/>
+
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -58,92 +61,6 @@
                 android:background="@drawable/border"
                 android:padding="5dp"
                 android:text="자켓" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="두번째 줄" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="두번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="두번째 아녕3" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕3" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕3" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕3" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕3" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕" />
-            <TextView
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="세번째 아녕3" />
         </TableRow>
     </TableLayout>
 
