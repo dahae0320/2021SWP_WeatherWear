@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "804620343447",
+    "project_id": "weather-wear-a0427",
+    "storage_bucket": "weather-wear-a0427.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804620343447:android:d97ef55f800d62d9e871d2",
+        "android_client_info": {
+          "package_name": "com.SWP.WeatherWear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_WaQMjYQsWN0wDFyBncLV3xTEMiRyWQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804620343447:android:cf022c15b56dfcade871d2",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804620343447-orflahs0gcbr3732euinpgfv9cap5fmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.application",
+            "certificate_hash": "c6e9dfd544d47224f331ffe53d53caa58ccc59bf"
+          }
+        },
+        {
+          "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_WaQMjYQsWN0wDFyBncLV3xTEMiRyWQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804620343447:android:4e42f10545d0ee63e871d2",
+        "android_client_info": {
+          "package_name": "com.example.a2021swp_weatherwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_WaQMjYQsWN0wDFyBncLV3xTEMiRyWQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804620343447-m42s9vvh4t9ullbi8piivunl80apl88i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
