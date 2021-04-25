@@ -47,23 +47,20 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:stretchColumns="0,1,2">
-
         <TableRow>
             <TextView
-                android:background="@drawable/border"
                 android:padding="5dp"
                 android:text="숏패딩"/>
             <TextView
-                android:background="@drawable/border"
                 android:padding="5dp"
                 android:text="롱패딩" />
             <TextView
-                android:background="@drawable/border"
                 android:padding="5dp"
                 android:text="자켓" />
         </TableRow>
     </TableLayout>
 
+<!--    로그아웃, 추가 버튼-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
