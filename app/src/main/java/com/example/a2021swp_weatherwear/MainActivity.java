@@ -6,7 +6,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,14 +26,45 @@ import com.kakao.util.exception.KakaoException;
 
 import java.security.MessageDigest;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private ISessionCallback mSessionCallback;
+    TextView tv;
+    ImageView iv;
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        iv = findViewById(R.id.iv);
+        tv = findViewById(R.id.tv);
+
+        //뷰에 애니메이션 적용
+        Animation ani1 = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        iv.startAnimation(ani1);
+        tv.startAnimation(AnimationUtils.loadAnimation(this,R.anim.fade_in));
+
+        //애니메이션이 끝나면 로그인 버튼이 보임
+        ani1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
 
         mSessionCallback = new ISessionCallback() {
             @Override
@@ -104,5 +139,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Session.getCurrentSession().removeCallback(mSessionCallback);
+    }
+
+    public void onCustomToggleClick(View view) {
+        Toast.makeText(this, "CustomToggle", Toast.LENGTH_SHORT).show();
     }
 }
