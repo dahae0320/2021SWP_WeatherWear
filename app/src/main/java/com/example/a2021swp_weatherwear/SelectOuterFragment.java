@@ -3,6 +3,7 @@ package com.example.a2021swp_weatherwear;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,7 +78,7 @@ public class SelectOuterFragment extends Fragment {
         // Add the following lines to create RecyclerView
         recyclerOuterView = view.findViewById(R.id.recyclerViewOuter);
         recyclerOuterView.setHasFixedSize(true);
-        recyclerOuterView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerOuterView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         OuterTextAdaptor adapter = new OuterTextAdaptor(list);
         recyclerOuterView.setAdapter(adapter);
 
