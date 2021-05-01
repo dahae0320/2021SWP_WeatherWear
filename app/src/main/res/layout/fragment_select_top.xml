@@ -11,4 +11,10 @@
         android:layout_height="match_parent"
         android:text="top 버튼을 눌러서 나온 fragment" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTop"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </FrameLayout>

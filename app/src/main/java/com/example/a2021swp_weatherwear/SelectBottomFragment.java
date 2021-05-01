@@ -3,10 +3,14 @@ package com.example.a2021swp_weatherwear;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SelectBottomFragment extends Fragment {
+
+    // Add RecyclerView member
+    private RecyclerView recyclerBottomView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +66,21 @@ public class SelectBottomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_bottom, container, false);
+        View view = inflater.inflate(R.layout.fragment_select_bottom, container, false);
+
+        // 리사이클러뷰에 표시할 데이터 리스트 생성.
+        ArrayList<String> list = new ArrayList<>();
+        for (int i=0; i<100; i++) {
+            list.add(String.format("TEXT %d", i)) ;
+        }
+
+        // Add the following lines to create RecyclerView
+        recyclerBottomView = view.findViewById(R.id.recyclerViewBottom);
+        recyclerBottomView.setHasFixedSize(true);
+        recyclerBottomView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        OuterTextAdaptor adapter = new OuterTextAdaptor(list);
+        recyclerBottomView.setAdapter(adapter);
+
+        return view;
     }
 }

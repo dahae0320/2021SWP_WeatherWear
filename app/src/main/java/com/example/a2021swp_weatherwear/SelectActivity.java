@@ -39,7 +39,7 @@ public class SelectActivity extends AppCompatActivity {
         Log.e(TAG, code);
 
         Fragment frag1 = new SelectOuterFragment().newInstance(code,"");
-        Fragment frag2 = new SelectTopFragment().newInstance(code,"https://m.naver.com");
+        Fragment frag2 = new SelectTopFragment().newInstance(code,"");
         Fragment frag3 = new SelectBottomFragment().newInstance(code,"");
 
         mViewPager = findViewById(R.id.viewPager);
