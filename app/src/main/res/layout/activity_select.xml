@@ -31,20 +31,20 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/viewPager"/>
 
 <!--    로그아웃, 추가 버튼-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content">
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="추가하기"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true" />
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
@@ -53,9 +53,7 @@
             android:layout_marginLeft="25dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:textSize="10dp"/>
+            android:textSize="10dp" />
     </RelativeLayout>
-
-
 
 </LinearLayout>
