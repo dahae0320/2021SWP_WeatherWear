@@ -8,32 +8,6 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/btnClothSelect"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="20dp">-->
-<!--        <Button-->
-<!--            android:id="@+id/btnOuter"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="아우터" />-->
-<!--        <Button-->
-<!--            android:id="@+id/btnTop"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:text="상의" />-->
-<!--        <Button-->
-<!--            android:id="@+id/btnBottom"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:text="하의" />-->
-<!--    </LinearLayout>-->
-
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_height="wrap_content"
@@ -59,13 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/viewPager"/>
-
-
-    <FrameLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_container"/>
 
 <!--    로그아웃, 추가 버튼-->
     <RelativeLayout
