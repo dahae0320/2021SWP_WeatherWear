@@ -22,7 +22,7 @@ public class BottomTextAdaptor extends RecyclerView.Adapter<BottomTextAdaptor.Vi
             super(itemView);
 
             // 뷰 객체에 대한 참조 (hold strong reference)
-            TxtOuter = itemView.findViewById(R.id.recyclerTxtOuter);
+            TxtOuter = itemView.findViewById(R.id.recyclerTxt);
         }
     }
 
@@ -38,7 +38,7 @@ public class BottomTextAdaptor extends RecyclerView.Adapter<BottomTextAdaptor.Vi
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recyclerviewouter_item, parent, false) ;
+        View view = inflater.inflate(R.layout.recyclerview_item, parent, false) ;
         BottomTextAdaptor.ViewHolder vh = new BottomTextAdaptor.ViewHolder(view) ;
 
         return vh ;
