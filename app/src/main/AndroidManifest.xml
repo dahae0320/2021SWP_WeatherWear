@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.2021SWP_WeatherWear">
         <activity android:name=".SelectActivity"></activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RecommendActivity">
+        <activity android:name=".RecommendActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
