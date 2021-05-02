@@ -286,7 +286,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp">
 
         <ToggleButton
             android:id="@+id/favBtn"
