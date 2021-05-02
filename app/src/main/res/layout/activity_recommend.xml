@@ -11,34 +11,73 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="#F5F6CE">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:gravity="right"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="1dp"
+            android:paddingBottom="5dp"
+            android:text="TextView" />
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="1dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="님 안녕하세요" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/layoutBeforeBunch"
         android:layout_margin="10dp">
 
-       <LinearLayout
-           android:id="@+id/layoutBefore1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:gravity="center"
-           android:layout_margin="10dp">
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/txtBeforeTime1"
-               android:padding="10dp"
-               android:text="오후 3시"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/txtBeforeCelsius1"
-               android:paddingTop="10dp"
-               android:paddingBottom="10dp"
-               android:paddingLeft="20dp"
-               android:paddingRight="20dp"
-               android:background="#80FFEB3B"
-               android:text="16°C" />
-       </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutBefore1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeTime1"
+                android:padding="10dp"
+                android:text="오후 3시"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBeforeCelsius1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="#80FFEB3B"
+                android:text="16°C" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutBefore2"
@@ -133,7 +172,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFEB3B"
@@ -145,10 +184,16 @@
     <TextView
         android:id="@+id/textView1"
         android:layout_width="326dp"
-        android:layout_height="51dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="#80FFEB3B"
-        android:textColorHighlight="#B62A2A" />
+        android:textColorHighlight="#B62A2A"
+        android:text="우산을 챙기세요!!"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -156,11 +201,30 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="130dp"
-            android:layout_height="204dp"
-            tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="110dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
+                android:src="@drawable/hanger"/>
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="없음"
+                android:textSize="17dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -168,27 +232,73 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="180dp"
-                android:layout_height="95dp"
-                tools:srcCompat="@tools:sample/avatars" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="180dp"
-                android:layout_height="95dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="110dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="left"
+                    android:src="@drawable/shirt"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="셔츠"
+                    android:textSize="17dp"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="110dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/jean" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="청바지"
+                    android:textSize="17dp" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginTop="30dp">
 
-        <Button
+
+        <ToggleButton
+            android:id="@+id/favBtn"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/heart_button"
+            android:onClick="onCustomToggleClick"></ToggleButton>
+
+<!--         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLike"
@@ -197,13 +307,15 @@
             android:minWidth="0dp"
             android:layout_centerVertical="true"
             android:text="좋아요"/>
+ -->
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:background="@drawable/custom_button"
+            android:src="@drawable/refresh" />
 
         <ImageButton
             android:id="@+id/imageButton1"
@@ -211,7 +323,10 @@
             android:layout_height="54dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
+            android:background="@drawable/custom_button"
+            android:src="@drawable/add"
             android:text="btnAddCloset" />
     </RelativeLayout>
+
 
 </LinearLayout>
