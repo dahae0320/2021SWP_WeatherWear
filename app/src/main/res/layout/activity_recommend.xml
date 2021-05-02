@@ -285,6 +285,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="30dp">
 
+
         <ToggleButton
             android:id="@+id/favBtn"
             android:layout_width="54dp"
@@ -296,6 +297,17 @@
             android:textOff=""
             android:background="@drawable/heart_button"
             android:onClick="onCustomToggleClick"></ToggleButton>
+
+<!--         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLike"
+            android:layout_marginLeft="10dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_centerVertical="true"
+            android:text="좋아요"/>
+ -->
 
         <ImageButton
             android:id="@+id/imageButton2"
