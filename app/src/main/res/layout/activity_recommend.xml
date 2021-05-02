@@ -248,13 +248,12 @@
                 android:layout_gravity="left"
                 android:src="@drawable/shirt"/>
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="셔츠"
-                    android:textSize="17dp"></TextView>
+                    android:textSize="17dp" />
 
             </LinearLayout>
 
