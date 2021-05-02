@@ -2,10 +2,10 @@
 package com.example.a2021swp_weatherwear;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,9 +17,11 @@ import java.util.Timer;
 
 
 
+
 public class RecommendActivity extends AppCompatActivity
 {
 
+    private String strNick;
     ImageButton btnAddCloset;
     long systemTime = System.currentTimeMillis();
     // 현재 시스템 시간 구하기
@@ -42,12 +44,32 @@ public class RecommendActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
 
+
+        final Button favBtn = (Button) findViewById(R.id.favBtn);
+
+        // 클릭시 선택된다.
+        favBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favBtn.setSelected(true);
+            }
+        });
+
+        Intent intent = getIntent();
+        strNick = intent.getStringExtra("name");
+
+        TextView tv_name = findViewById(R.id.text_name);
+
+        // name set
+        tv_name.setText(strNick);
+
         weather_text = (TextView) findViewById(R.id.txtBeforeCelsius1);
         weather_text = (TextView) findViewById(R.id.txtBeforeCelsius2);
         weather_text = (TextView) findViewById(R.id.txtBeforeCelsius3);
         weather_text = (TextView) findViewById(R.id.txtBeforeCelsius4);
 
         home_text = (TextView) findViewById(R.id.home);
+
 
         btnAddCloset = findViewById(R.id.imageButton1);
         timer = (TextView) findViewById(R.id.textView2);
@@ -72,6 +94,7 @@ public class RecommendActivity extends AppCompatActivity
                             Calendar calendar = Calendar.getInstance(); // 날짜 변수
 
                             int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
+
 
                             if(hour <= 11)
                             timer.setText("현재 시각\n" + "오전" + hour + "시 ");
@@ -105,4 +128,5 @@ public class RecommendActivity extends AppCompatActivity
         };
         thread.start();
     }
+
 }
