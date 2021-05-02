@@ -82,9 +82,9 @@ public class SelectOuterFragment extends Fragment {
 
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<String> list = new ArrayList<>();
-        for (int i=0; i<100; i++) {
-            list.add(String.format("TEXT %d", i));
-        }
+//        for (int i=0; i<100; i++) {
+//            list.add(String.format("TEXT %d", i));
+//        }
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference = database.getReference("Garment"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
