@@ -4,84 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectActivity"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    tools:context=".SelectActivity">
 
-    <LinearLayout
-        android:id="@+id/btnClothSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/btnOuter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="아우터" />
-        <Button
-            android:id="@+id/btnTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="상의" />
-        <Button
-            android:id="@+id/btnBottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="하의" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_marginTop="30dp"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_container"/>
+        app:tabTextColor="@color/logoutGray"
+        app:tabSelectedTextColor="@color/TabColor"
+        app:tabIndicatorColor="@color/TabColor">
 
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItemOuter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outer" />
 
-    <TableLayout
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItemTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItemBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bottom" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:stretchColumns="0,1,2">
-        <TableRow>
-            <TextView
-                android:padding="5dp"
-                android:text="숏패딩"/>
-            <TextView
-                android:padding="5dp"
-                android:text="롱패딩" />
-            <TextView
-                android:padding="5dp"
-                android:text="자켓" />
-        </TableRow>
-    </TableLayout>
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1" />
 
-<!--    로그아웃, 추가 버튼-->
+    <!--    로그아웃, 추가 버튼-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginBottom="20dp">
+
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="추가하기"
-            android:layout_centerHorizontal="true"/>
+            android:textColor="@color/black"
+            android:backgroundTint="@color/AddYellow"/>
+
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃"
             android:layout_marginLeft="25dp"
-            android:minHeight="0dp"
             android:minWidth="0dp"
-            android:textSize="10dp"/>
+            android:minHeight="0dp"
+            android:text="로그아웃"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/logoutGray"/>
     </RelativeLayout>
-
-
 
 </LinearLayout>
