@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a2021swp_weatherwear">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.2021SWP_WeatherWear">
-        <activity android:name=".SelectActivity"></activity>
+        android:theme="@style/Theme.2021SWP_WeatherWear"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".LikeActivity"></activity>
+        <activity android:name=".SelectActivity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
