@@ -22,7 +22,7 @@ public class RecommendActivity extends AppCompatActivity
 {
 
     private String strNick;
-    ImageButton btnAddCloset;
+    ImageButton btnAddCloth;
     long systemTime = System.currentTimeMillis();
     // 현재 시스템 시간 구하기
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
@@ -71,7 +71,7 @@ public class RecommendActivity extends AppCompatActivity
         home_text = (TextView) findViewById(R.id.home);
 
 
-        btnAddCloset = findViewById(R.id.imageButton1);
+        btnAddCloth = findViewById(R.id.imageButton1);
         timer = (TextView) findViewById(R.id.textView2);
 
         Thread thread = new Thread()
@@ -114,7 +114,7 @@ public class RecommendActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
 
-                    btnAddCloset.setOnClickListener(new View.OnClickListener() {
+                    btnAddCloth.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
