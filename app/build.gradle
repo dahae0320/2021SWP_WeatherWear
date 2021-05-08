@@ -3,6 +3,7 @@ plugins {
 }
 apply plugin: 'com.google.gms.google-services'
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -47,7 +48,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-database:19.7.0'
 
-    //카카오 로그인
+    // 플로팅버튼
+    implementation 'com.github.clans:fab:1.6.4'
+
+    // 카카오 로그인
     implementation 'com.kakao.sdk:usermgmt:1.27.0'
 
     testImplementation 'junit:junit:4.13.2'
