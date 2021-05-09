@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class OuterTextAdaptor extends RecyclerView.Adapter<OuterTextAdaptor.ViewHolder> {
 
-
+    // 클릭 이벤트 인터페이스 생성
     public interface OnListItemSelectedInterface {
         void onItemSelected(View v, int position);
     }
@@ -36,7 +36,7 @@ public class OuterTextAdaptor extends RecyclerView.Adapter<OuterTextAdaptor.View
                 @Override
                 public void onClick(View v) {
                     mListener.onItemSelected(v, getAbsoluteAdapterPosition());
-                    Log.d("Recyclerview", "position = "+ getAbsoluteAdapterPosition());
+                    Log.d("Recyclerview Outer", "position = "+ getAbsoluteAdapterPosition());
                 }
             });
         }

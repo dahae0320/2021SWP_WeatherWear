@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  * Use the {@link SelectTopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectTopFragment extends Fragment {
+public class SelectTopFragment extends Fragment implements TopTextAdaptor.OnListItemSelectedInterface {
 
     // Add RecyclerView member
     private RecyclerView recyclerTopView;
@@ -109,9 +110,15 @@ public class SelectTopFragment extends Fragment {
         recyclerTopView = view.findViewById(R.id.recyclerViewTop);
         recyclerTopView.setHasFixedSize(true);
         recyclerTopView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mAdaptor = new TopTextAdaptor(list);
+        mAdaptor = new TopTextAdaptor(list, this);
         recyclerTopView.setAdapter(mAdaptor);
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+        TopTextAdaptor.ViewHolder viewHolder = (TopTextAdaptor.ViewHolder)recyclerTopView.findViewHolderForAdapterPosition(position);
+        Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }
