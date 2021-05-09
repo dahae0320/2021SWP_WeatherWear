@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  * Use the {@link SelectOuterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectOuterFragment extends Fragment {
+public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.OnListItemSelectedInterface{
 
     // Add RecyclerView member
     private RecyclerView recyclerOuterView;
@@ -109,9 +110,15 @@ public class SelectOuterFragment extends Fragment {
         recyclerOuterView = view.findViewById(R.id.recyclerViewOuter);
         recyclerOuterView.setHasFixedSize(true);
         recyclerOuterView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mAdaptor = new OuterTextAdaptor(list);
+        mAdaptor = new OuterTextAdaptor(list, this);
         recyclerOuterView.setAdapter(mAdaptor);
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+        OuterTextAdaptor.ViewHolder viewHolder = (OuterTextAdaptor.ViewHolder)recyclerOuterView.findViewHolderForAdapterPosition(position);
+        Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }
