@@ -16,9 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".LikeActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SelectActivity" />
         <activity android:name=".RecommendActivity" />
-        <activity android:name=".SelectActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
