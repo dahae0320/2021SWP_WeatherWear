@@ -1,7 +1,6 @@
 
 package com.example.a2021swp_weatherwear;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +11,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.BreakIterator;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Timer;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -29,6 +28,7 @@ public class RecommendActivity extends AppCompatActivity
     FloatingActionMenu fabMenu;
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
+
 
     private String strNick;
     long systemTime = System.currentTimeMillis();
@@ -73,11 +73,6 @@ public class RecommendActivity extends AppCompatActivity
 
         // name set
         tv_name.setText(strNick);
-
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius1);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius2);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius3);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius4);
 
         home_text = (TextView) findViewById(R.id.home);
 

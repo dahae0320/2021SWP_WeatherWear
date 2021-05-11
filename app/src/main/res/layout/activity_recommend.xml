@@ -50,7 +50,6 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
                 android:text="님 안녕하세요" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -184,7 +183,7 @@
                 android:padding="10dp"
                 android:text="현재 시각\n 오후 1시"
                 android:textSize="20dp" />
-
+          
             <TextView
                 android:id="@+id/tv"
                 android:layout_width="wrap_content"
