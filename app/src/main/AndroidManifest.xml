@@ -15,10 +15,10 @@
         android:theme="@style/Theme.2021SWP_WeatherWear"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".LikeActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SelectActivity" />
         <activity android:name=".RecommendActivity" />
-        <activity android:name=".LikeActivity">
+        <activity android:name=".SelectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
