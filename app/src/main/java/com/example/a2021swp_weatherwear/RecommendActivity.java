@@ -1,28 +1,36 @@
 
 package com.example.a2021swp_weatherwear;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.text.BreakIterator;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Timer;
+
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 
 
 
 public class RecommendActivity extends AppCompatActivity
 {
+    FloatingActionMenu fabMenu;
+    FloatingActionButton fabCloset;
+    FloatingActionButton fabLikelist;
+
 
     private String strNick;
-    ImageButton btnAddCloset;
     long systemTime = System.currentTimeMillis();
     // 현재 시스템 시간 구하기
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
@@ -37,17 +45,20 @@ public class RecommendActivity extends AppCompatActivity
     String weather_data;
     String home_data;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
 
+        // 플로팅 버튼
+        fabMenu = findViewById(R.id.fabMenu);
+        fabCloset = findViewById(R.id.fabCloset);
+        fabLikelist = findViewById(R.id.fabLikelist);
 
+        // 좋아요 버튼
         final Button favBtn = (Button) findViewById(R.id.favBtn);
 
-        // 클릭시 선택된다.
         favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,15 +74,9 @@ public class RecommendActivity extends AppCompatActivity
         // name set
         tv_name.setText(strNick);
 
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius1);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius2);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius3);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius4);
-
         home_text = (TextView) findViewById(R.id.home);
 
 
-        btnAddCloset = findViewById(R.id.imageButton1);
         timer = (TextView) findViewById(R.id.textView2);
 
         Thread thread = new Thread()
@@ -114,19 +119,31 @@ public class RecommendActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
 
-                    btnAddCloset.setOnClickListener(new View.OnClickListener() {
+                    fabCloset.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
-                            //이미지 상의 + 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                            //이미지 상의 의류 추가 버튼을 누르면 SelectActivity 화면으로 이동한다.
                             startActivity(i1);
                         }
                     });
 
+                    fabLikelist.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i3 = new Intent(RecommendActivity.this, LikeActivity.class);
+                            //이미지 상의 좋아요 확인 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                            startActivity(i3);
+                        }
+                    });
                 }
             }
         };
         thread.start();
+    }
+
+    private void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 }

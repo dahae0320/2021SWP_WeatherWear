@@ -30,5 +30,4 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="cbff1a6b0b0c89a2490228866a493736" />
     </application>
-
 </manifest>

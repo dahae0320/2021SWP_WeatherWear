@@ -64,9 +64,4 @@ public class LikeActivity extends AppCompatActivity {
 
         mList.add(item);
     }
-
-//    private void setSupportActionBar(Toolbar myToolbar) {
-//        // 비워둠
-//    }
-
 }
