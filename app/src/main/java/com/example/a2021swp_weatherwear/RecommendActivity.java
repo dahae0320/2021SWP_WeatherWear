@@ -1,7 +1,6 @@
 
 package com.example.a2021swp_weatherwear;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,17 +8,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.text.BreakIterator;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Timer;
 
 
 
 
 public class RecommendActivity extends AppCompatActivity
 {
+
 
     private String strNick;
     ImageButton btnAddCloset;
@@ -62,11 +62,6 @@ public class RecommendActivity extends AppCompatActivity
 
         // name set
         tv_name.setText(strNick);
-
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius1);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius2);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius3);
-        weather_text = (TextView) findViewById(R.id.txtBeforeCelsius4);
 
         home_text = (TextView) findViewById(R.id.home);
 
