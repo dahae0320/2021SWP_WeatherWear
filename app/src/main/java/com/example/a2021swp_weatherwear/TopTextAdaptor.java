@@ -1,6 +1,7 @@
 package com.example.a2021swp_weatherwear;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,13 @@ import java.util.ArrayList;
 
 public class TopTextAdaptor extends RecyclerView.Adapter<TopTextAdaptor.ViewHolder> {
 
+    // 클릭 이벤트 인터페이스 생성
+    public interface OnListItemSelectedInterface {
+        void onItemSelected(View v, int position);
+    }
+
+    private TopTextAdaptor.OnListItemSelectedInterface mListener;
+
     private ArrayList<String> mData = null;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스
@@ -23,12 +31,21 @@ public class TopTextAdaptor extends RecyclerView.Adapter<TopTextAdaptor.ViewHold
 
             // 뷰 객체에 대한 참조 (hold strong reference)
             TxtOuter = itemView.findViewById(R.id.recyclerTxt);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemSelected(v, getAbsoluteAdapterPosition());
+                    Log.d("Recyclerview Top", "position = "+ getAbsoluteAdapterPosition());
+                }
+            });
         }
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    TopTextAdaptor(ArrayList<String> list) {
-        mData = list ;
+    TopTextAdaptor(ArrayList<String> list, OnListItemSelectedInterface listener) {
+        mData = list;
+        mListener = listener;
     }
 
     @NonNull

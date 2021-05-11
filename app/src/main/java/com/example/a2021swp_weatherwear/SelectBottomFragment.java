@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  * Use the {@link SelectBottomFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectBottomFragment extends Fragment {
+public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.OnListItemSelectedInterface {
 
     // Add RecyclerView member
     private RecyclerView recyclerBottomView;
@@ -109,9 +110,15 @@ public class SelectBottomFragment extends Fragment {
         recyclerBottomView = view.findViewById(R.id.recyclerViewBottom);
         recyclerBottomView.setHasFixedSize(true);
         recyclerBottomView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mAdaptor = new BottomTextAdaptor(list);
+        mAdaptor = new BottomTextAdaptor(list, this);
         recyclerBottomView.setAdapter(mAdaptor);
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+        BottomTextAdaptor.ViewHolder viewHolder = (BottomTextAdaptor.ViewHolder)recyclerBottomView.findViewHolderForAdapterPosition(position);
+        Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }
