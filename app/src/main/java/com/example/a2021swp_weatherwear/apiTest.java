@@ -18,7 +18,7 @@ public class apiTest extends Thread {
         String endPoint = "http://apis.data.go.kr/1360000/VilageFcstInfoService";
         String serviceKey = "n9Pfhnwdrxh%2FiMJefGgPTp2AqXB6JERmRhzBvdbZHL7Cbneqc7N5j6TxUvNOis9Ri%2Fz0dFdM8jbOYhKcmWj2Qg%3D%3D";
         String pageNo = "1";
-        String numOfRows = "15";
+        String numOfRows = "14";
         String baseDate = "20210511"; // 원하는 날짜
         String baseTime = "2000"; // 원하는 시간
         String nx = "35"; // 위경도임.
