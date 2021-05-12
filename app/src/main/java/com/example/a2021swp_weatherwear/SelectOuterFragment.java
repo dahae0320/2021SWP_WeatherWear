@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,8 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 
     // Add RecyclerView member
     private RecyclerView recyclerOuterView;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase database, databaseAdd;
+    private DatabaseReference databaseReference, databaseReferenceAdd;
     private OuterTextAdaptor mAdaptor;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -120,5 +121,22 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
     public void onItemSelected(View v, int position) {
         OuterTextAdaptor.ViewHolder viewHolder = (OuterTextAdaptor.ViewHolder)recyclerOuterView.findViewHolderForAdapterPosition(position);
         Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        // DB 연결
+        databaseAdd = FirebaseDatabase.getInstance();
+        databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Outer");
+        databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                databaseReferenceAdd.setValue("test Outer");
+
+                databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error : not added ", error.toString());
+            }
+        });
     }
 }
