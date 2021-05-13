@@ -18,11 +18,11 @@ public class apiTest extends Thread {
         String endPoint = "http://apis.data.go.kr/1360000/VilageFcstInfoService";
         String serviceKey = "n9Pfhnwdrxh%2FiMJefGgPTp2AqXB6JERmRhzBvdbZHL7Cbneqc7N5j6TxUvNOis9Ri%2Fz0dFdM8jbOYhKcmWj2Qg%3D%3D";
         String pageNo = "1";
-        String numOfRows = "14";
-        String baseDate = "20210511"; // 원하는 날짜
-        String baseTime = "2000"; // 원하는 시간
-        String nx = "35"; // 위경도임.
-        String ny = "128"; // 위경도 정보는 api 문서 볼 것
+        String numOfRows = "10";
+        String baseDate = "20210513"; // 원하는 날짜
+        String baseTime = "1100"; // 원하는 시간
+        String nx = "81"; // 위경도임.
+        String ny = "75"; // 위경도 정보는 api 문서 볼 것
 
         // endpoint와 원하는 정보(동네예보조회:getVilageFcst), 서비스키와 기타 요청 매개변수들을 다 합친 쿼리 스트링이다.
         String s = endPoint + "/getVilageFcst?serviceKey=" + serviceKey
