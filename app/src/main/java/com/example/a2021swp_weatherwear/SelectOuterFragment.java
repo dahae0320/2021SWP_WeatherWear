@@ -117,14 +117,15 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 //    private boolean getUserOuterData(int pos) {
 //        database = FirebaseDatabase.getInstance();
 //        databaseReference = database.getReference("User").child("User2").child("Outer");
-//        String[] str = {null};
-//        boolean bool = true;
+//
+//        String[] str = new String[1];
+//        boolean nullValue = true;
 //
 //        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                str[0] = databaseReference.child(String.valueOf(pos)).getKey();
-//                System.out.println("데이터 있는지 없는지 확인 중!");
+//                str[0] = (String) snapshot.child(String.valueOf(pos)).getValue();
+//                System.out.println(snapshot.child(String.valueOf(pos)).getValue());
 //            }
 //
 //            @Override
@@ -133,16 +134,15 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 //            }
 //        });
 //
-//        System.out.println(str[0].isEmpty());
-//        if ( str[0].isEmpty() ) {
-//            bool = false;
-//            System.out.println("데이터 없음!");
-//        } else {
-//            bool = true;
+//        if ( str[0].equals(null) ) {
+//            nullValue = false;
 //            System.out.println("데이터 있!음 두번 클릭했으니ㅏㄲ 삭제한다는 거지? ");
+//        } else {
+//            nullValue = true;
+//            System.out.println("데이터 없음!");
 //        }
 //
-//        return bool;
+//        return nullValue;
 //    }
 
     @Override
@@ -161,7 +161,7 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 // 클릭을 할떄 이미 데이터가 있는지 확인하기. 없으면 저장, 있으면 삭제!
-//                if ( getUserOuterData(position) ) {  // 데이터가 이미 있음!!
+//                if ( !getUserOuterData(position) ) {  // 데이터가 이미 있음!! (true)
 //                    databaseReferenceAdd.child(String.valueOf(position)).removeValue();
 //                    System.out.println("데이터 삭제한당!");
 //                } else {
