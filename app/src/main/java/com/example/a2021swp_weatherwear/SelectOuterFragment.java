@@ -168,7 +168,8 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 //                    databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
 //                    System.out.println("데이터 저장할게~");
 //                }
-                databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+
+                databaseReferenceAdd.child(String.valueOf(position)).setValue("test");
             }
 
             @Override

@@ -56,13 +56,13 @@ public class apiTest extends Thread {
         conn.disconnect();
 
         JSONObject mainObject = new JSONObject(result);
-        System.out.println(mainObject);
-        JSONArray itemArray = mainObject.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
-        for (int i = 0; i < itemArray.length(); i++) {
-            JSONObject item = itemArray.getJSONObject(i);
-            String category = item.getString("category");
-            String value = item.getString("fcstValue");
-            System.out.println(category + "  " + value);
-        }
+//        System.out.println(mainObject);
+//        JSONArray itemArray = mainObject.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+//        for (int i = 0; i < itemArray.length(); i++) {
+//            JSONObject item = itemArray.getJSONObject(i);
+//            String category = item.getString("category");
+//            String value = item.getString("fcstValue");
+//            System.out.println(category + "  " + value);
+//        }
     }
 }
