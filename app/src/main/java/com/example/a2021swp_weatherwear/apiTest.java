@@ -13,14 +13,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class apiTest extends Thread {
-    public void func() throws IOException, JSONException {
+    public void func(String year, String month, String day) throws IOException, JSONException {
         // 기상청 동네예보 api에서 동네예보조회 요청에 필요한 매개변수들
         String endPoint = "http://apis.data.go.kr/1360000/VilageFcstInfoService";
         String serviceKey = "n9Pfhnwdrxh%2FiMJefGgPTp2AqXB6JERmRhzBvdbZHL7Cbneqc7N5j6TxUvNOis9Ri%2Fz0dFdM8jbOYhKcmWj2Qg%3D%3D";
         String pageNo = "1";
         String numOfRows = "10";
-        String baseDate = "20210513"; // 원하는 날짜
-        String baseTime = "1100"; // 원하는 시간
+        String baseDate = year + month + day; // 원하는 날짜
+        String baseTime = "2000"; // 원하는 시간
         String nx = "81"; // 위경도임.
         String ny = "75"; // 위경도 정보는 api 문서 볼 것
 
@@ -56,13 +56,14 @@ public class apiTest extends Thread {
         conn.disconnect();
 
         JSONObject mainObject = new JSONObject(result);
-//        System.out.println(mainObject);
-//        JSONArray itemArray = mainObject.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
-//        for (int i = 0; i < itemArray.length(); i++) {
-//            JSONObject item = itemArray.getJSONObject(i);
-//            String category = item.getString("category");
-//            String value = item.getString("fcstValue");
-//            System.out.println(category + "  " + value);
-//        }
+        System.out.println(mainObject);
+        JSONArray itemArray = mainObject.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+        for (int i = 0; i < itemArray.length(); i++) {
+            JSONObject item = itemArray.getJSONObject(i);
+            String category = item.getString("category");
+            String value = item.getString("fcstValue");
+            System.out.println(category + "  " + value);
+        }
+
     }
 }

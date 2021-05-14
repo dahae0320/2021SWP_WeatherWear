@@ -29,6 +29,8 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
+    private String year, month, day;
+
 
     private String strNick;
     long systemTime = System.currentTimeMillis();
@@ -88,7 +90,13 @@ public class RecommendActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Calendar calendar = Calendar.getInstance(); // 날짜 변수
+                            year = String.valueOf(calendar.get(Calendar.YEAR));
+                            month = 0+String.valueOf(calendar.get(Calendar.MONTH)+1);
+                            day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
                             int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
+
+                            System.out.println(year + month + day);
+
                             if (hour <= 11)
                                 timer.setText("현재 시각\n" + "오전" + hour + "시 ");
                             else if (hour >= 13)
@@ -97,7 +105,7 @@ public class RecommendActivity extends AppCompatActivity {
                     });
 
                     try {
-                        apiTest.func();
+                        apiTest.func(year, month, day);
                         Thread.sleep(1000); // 1000 ms = 1초
                     } catch (InterruptedException e) {
                         e.printStackTrace();
