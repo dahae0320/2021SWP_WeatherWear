@@ -169,7 +169,8 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 //                    System.out.println("데이터 저장할게~");
 //                }
 
-                databaseReferenceAdd.child(String.valueOf(position)).setValue("test");
+                String str = viewHolder.TxtOuter.getText().toString();
+                databaseReferenceAdd.child(String.valueOf(position)).setValue(str);
             }
 
             @Override

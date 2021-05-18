@@ -139,7 +139,8 @@ public class SelectTopFragment extends Fragment implements TopTextAdaptor.OnList
 //                    databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
 //                    System.out.println("데이터 저장할게~");
 //                }
-                databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+                String str = viewHolder.TxtOuter.getText().toString();
+                databaseReferenceAdd.child(String.valueOf(position)).setValue(str);
             }
 
             @Override
