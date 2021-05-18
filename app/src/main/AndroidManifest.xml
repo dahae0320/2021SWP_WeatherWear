@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.a2021swp_weatherwear">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".CustomApplication"
@@ -12,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.2021SWP_WeatherWear"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".LikeActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity android:name=".LikeActivity" />
         <activity android:name=".SelectActivity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".MainActivity">
@@ -28,5 +31,4 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="cbff1a6b0b0c89a2490228866a493736" />
     </application>
-
 </manifest>

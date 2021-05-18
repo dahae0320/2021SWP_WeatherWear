@@ -4,12 +4,13 @@ package com.example.a2021swp_weatherwear;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -21,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 public class RecommendActivity extends AppCompatActivity {
     FloatingActionMenu fabMenu;
@@ -29,7 +32,6 @@ public class RecommendActivity extends AppCompatActivity {
     TextView weatherTemp;
 
     private String year, month, day;
-
 
     private String strNick;
     long systemTime = System.currentTimeMillis();
@@ -79,7 +81,6 @@ public class RecommendActivity extends AppCompatActivity {
         home_text = findViewById(R.id.home);
         timer = findViewById(R.id.textView2);
 
-
         Thread thread = new Thread() {
 
             @Override
@@ -88,6 +89,7 @@ public class RecommendActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             JSONObject r1 = apiTest.s1;
                             JSONObject r2 = apiTest.s2;
                             JSONObject r3 = apiTest.s3;
@@ -100,7 +102,6 @@ public class RecommendActivity extends AppCompatActivity {
                             int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
                             System.out.println(year + month + day);
-
 
                             if (hour <= 11) {
                                 timer.setText("현재 시각\n" + "오전" + hour + "시 ");
@@ -127,7 +128,6 @@ public class RecommendActivity extends AppCompatActivity {
                             }
                         }
                     });
-
 
                     try {
                         apiTest.func(year, month, day);

@@ -16,14 +16,8 @@
         android:backgroundTint="@color/AddYellow"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="'좋아요' 누른 옷차림"
-            android:layout_gravity="center"
-            android:textSize="20dp"/>
-    </androidx.appcompat.widget.Toolbar>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="'좋아요' 누른 옷차림" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLike"

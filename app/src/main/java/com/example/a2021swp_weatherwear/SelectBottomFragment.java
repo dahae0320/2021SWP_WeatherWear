@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,12 +27,12 @@ import java.util.ArrayList;
  * Use the {@link SelectBottomFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectBottomFragment extends Fragment {
+public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.OnListItemSelectedInterface {
 
     // Add RecyclerView member
     private RecyclerView recyclerBottomView;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase database, databaseAdd;
+    private DatabaseReference databaseReference, databaseReferenceAdd;
     private BottomTextAdaptor mAdaptor;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -109,9 +110,42 @@ public class SelectBottomFragment extends Fragment {
         recyclerBottomView = view.findViewById(R.id.recyclerViewBottom);
         recyclerBottomView.setHasFixedSize(true);
         recyclerBottomView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mAdaptor = new BottomTextAdaptor(list);
+        mAdaptor = new BottomTextAdaptor(list, this);
         recyclerBottomView.setAdapter(mAdaptor);
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+        BottomTextAdaptor.ViewHolder viewHolder = (BottomTextAdaptor.ViewHolder)recyclerBottomView.findViewHolderForAdapterPosition(position);
+        Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        // DB 연결
+        databaseAdd = FirebaseDatabase.getInstance();
+        // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
+        databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Bottom");
+
+        // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 할
+        databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // 클릭을 할떄 이미 데이터가 있는지 확인하기. 없으면 저장, 있으면 삭제!
+//                if ( getUserOuterData(position) ) {  // 데이터가 이미 있음!!
+//                    databaseReferenceAdd.child(String.valueOf(position)).removeValue();
+//                    System.out.println("데이터 삭제한당!");
+//                } else {
+//                    databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+//                    System.out.println("데이터 저장할게~");
+//                }
+                databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error : not added ", error.toString());
+            }
+        });
     }
 }
