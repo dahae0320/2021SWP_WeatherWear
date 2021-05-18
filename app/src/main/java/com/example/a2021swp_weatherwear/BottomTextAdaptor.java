@@ -1,7 +1,9 @@
 package com.example.a2021swp_weatherwear;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,14 @@ import java.util.ArrayList;
 
 public class BottomTextAdaptor extends RecyclerView.Adapter<BottomTextAdaptor.ViewHolder> {
 
+    private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
+
     // 클릭 이벤트 인터페이스 생성
     public interface OnListItemSelectedInterface {
         void onItemSelected(View v, int position);
     }
 
-    private BottomTextAdaptor.OnListItemSelectedInterface mListener;
+    private OnListItemSelectedInterface mListener;
 
     private ArrayList<String> mData = null;
 
@@ -35,8 +39,18 @@ public class BottomTextAdaptor extends RecyclerView.Adapter<BottomTextAdaptor.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, getAbsoluteAdapterPosition());
-                    Log.d("Recyclerview Bottom", "position = "+ getAbsoluteAdapterPosition());
+                    int position = getAbsoluteAdapterPosition();
+
+                    if ( mSelectedItems.get(position, false) ){
+                        mSelectedItems.put(position, false);
+                        v.setBackgroundColor(Color.argb(0,255,255,255));
+                    } else {
+                        mSelectedItems.put(position, true);
+                        v.setBackgroundColor(Color.BLUE);
+                    }
+
+                    mListener.onItemSelected(v, position);
+                    Log.d("Recyclerview Outer", "position = "+ position);
                 }
             });
         }

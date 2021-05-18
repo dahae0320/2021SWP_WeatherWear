@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -31,8 +30,8 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 
     // Add RecyclerView member
     private RecyclerView recyclerOuterView;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase database, databaseAdd;
+    private DatabaseReference databaseReference, databaseReferenceAdd;
     private OuterTextAdaptor mAdaptor;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -83,11 +82,10 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
 
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<String> list = new ArrayList<>();
-//        for (int i=0; i<100; i++) {
-//            list.add(String.format("TEXT %d", i));
-//        }
+
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference = database.getReference("Garment"); // DB 테이블 연결
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -116,9 +114,68 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
         return view;
     }
 
+//    private boolean getUserOuterData(int pos) {
+//        database = FirebaseDatabase.getInstance();
+//        databaseReference = database.getReference("User").child("User2").child("Outer");
+//
+//        String[] str = new String[1];
+//        boolean nullValue = true;
+//
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                str[0] = (String) snapshot.child(String.valueOf(pos)).getValue();
+//                System.out.println(snapshot.child(String.valueOf(pos)).getValue());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.i("error","error");
+//            }
+//        });
+//
+//        if ( str[0].equals(null) ) {
+//            nullValue = false;
+//            System.out.println("데이터 있!음 두번 클릭했으니ㅏㄲ 삭제한다는 거지? ");
+//        } else {
+//            nullValue = true;
+//            System.out.println("데이터 없음!");
+//        }
+//
+//        return nullValue;
+//    }
+
     @Override
     public void onItemSelected(View v, int position) {
         OuterTextAdaptor.ViewHolder viewHolder = (OuterTextAdaptor.ViewHolder)recyclerOuterView.findViewHolderForAdapterPosition(position);
         Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        // DB 연결
+        databaseAdd = FirebaseDatabase.getInstance();
+        // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
+        databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Outer");
+
+        // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 할
+        databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // 클릭을 할떄 이미 데이터가 있는지 확인하기. 없으면 저장, 있으면 삭제!
+//                if ( !getUserOuterData(position) ) {  // 데이터가 이미 있음!! (true)
+//                    databaseReferenceAdd.child(String.valueOf(position)).removeValue();
+//                    System.out.println("데이터 삭제한당!");
+//                } else {
+//                    databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+//                    System.out.println("데이터 저장할게~");
+//                }
+
+                databaseReferenceAdd.child(String.valueOf(position)).setValue("test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error : not added ", error.toString());
+            }
+        });
     }
 }
