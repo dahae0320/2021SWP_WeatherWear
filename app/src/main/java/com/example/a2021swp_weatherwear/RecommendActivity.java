@@ -1,4 +1,3 @@
-
 package com.example.a2021swp_weatherwear;
 
 import android.content.Intent;

@@ -34,6 +34,8 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
     private DatabaseReference databaseReference, databaseReferenceAdd;
     private OuterTextAdaptor mAdaptor;
 
+    private long userId;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -77,6 +79,7 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_outer, container, false);
 
@@ -155,7 +158,7 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
         // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
         databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Outer");
 
-        // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 할
+        // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 해야함
         databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
