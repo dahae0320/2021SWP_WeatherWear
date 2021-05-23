@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -177,7 +178,17 @@ public class RecommendActivity extends AppCompatActivity {
         };
 //        thread.start();
 
+        // 옷차림 추천
         recommendGarment(currentCel);
+
+        // 옷차림 추천 새로고침
+        final ImageButton btnRefresh = findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recommendGarment(currentCel);
+            }
+        });
     }
 
     // 옷차림 추천 메소드
