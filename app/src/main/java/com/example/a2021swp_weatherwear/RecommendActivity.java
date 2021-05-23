@@ -46,8 +46,8 @@ public class RecommendActivity extends AppCompatActivity {
 
     // 옷차림 추천 관련 변수들
     private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
+    private DatabaseReference databaseReference, databaseReferenceLike;
     private TextView txtOuter, txtTop, txtBottom;
 
     private String strNick;
@@ -103,6 +103,7 @@ public class RecommendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 favBtn.setSelected(true);
+                saveLikeGarment();
             }
         });
 
@@ -191,6 +192,33 @@ public class RecommendActivity extends AppCompatActivity {
         });
     }
 
+    // 좋아요 누를 시 옷차림 저장
+    private void saveLikeGarment() {
+        Random random = new Random();
+        firebaseDatabaseLike = FirebaseDatabase.getInstance();
+        // TODO : User2는 실제 사용자 데이터를 불러올 수 있도록 한다.
+        databaseReferenceLike = firebaseDatabaseLike.getReference("User").child("User2").child("Like").child(String.valueOf(random.nextInt()));
+
+        databaseReferenceLike.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txtOuter = findViewById(R.id.textViewOuter);
+                txtTop = findViewById(R.id.textViewTop);
+                txtBottom = findViewById(R.id.textViewBottom);
+
+                databaseReferenceLike.child("outer").setValue(txtOuter.getText().toString());
+                databaseReferenceLike.child("top").setValue(txtTop.getText().toString());
+                databaseReferenceLike.child("bottom").setValue(txtBottom.getText().toString());
+                Toast.makeText(RecommendActivity.this, "좋아요 완료!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Like Error", String.valueOf(error)); // 에러문 출력
+            }
+        });
+    }
+
     // 옷차림 추천 메소드
     private void recommendGarment(int currentCel) {
         ArrayList<Integer> arrayList = new ArrayList<>();
@@ -210,7 +238,6 @@ public class RecommendActivity extends AppCompatActivity {
                 int i = 0;
 
                 // 현재 기온에 맞는 추천 옷차림 테이블 찾기
-                // TODO : 같은 값일 때 어떻게 할걸데? 그 부분 수정하기...
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(Integer.valueOf(dataSnapshot.getKey()));
                     if ( arrayList.get(i) > currentCel ) {
