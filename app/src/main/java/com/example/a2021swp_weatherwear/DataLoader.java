@@ -12,7 +12,6 @@ public class DataLoader {
         calendar.setTime(date);
         calendar.add(calendar.HOUR, x);
         String now = sformat.format(calendar.getTime());
-
         return now;
     }
 }
