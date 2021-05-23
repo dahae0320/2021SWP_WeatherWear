@@ -229,7 +229,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewOuter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -261,6 +261,7 @@
                         android:src="@drawable/shirt" />
 
                     <TextView
+                        android:id="@+id/textViewTop"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -283,7 +284,7 @@
                         android:src="@drawable/jean" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/textViewBottom"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -320,18 +321,6 @@
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"></ToggleButton>
-
-
-        <!--         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLike"
-            android:layout_marginLeft="10dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:layout_centerVertical="true"
-            android:text="좋아요"/>
-    -->
 
         <ImageButton
             android:id="@+id/imageButton2"
