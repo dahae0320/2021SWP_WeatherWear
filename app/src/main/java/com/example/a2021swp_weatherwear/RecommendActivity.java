@@ -2,6 +2,7 @@ package com.example.a2021swp_weatherwear;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,6 +47,7 @@ public class RecommendActivity extends AppCompatActivity {
     private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private TextView txtOuter, txtTop, txtBottom;
 
     private String strNick;
     long systemTime = System.currentTimeMillis();
@@ -197,6 +199,7 @@ public class RecommendActivity extends AppCompatActivity {
                 int i = 0;
 
                 // 현재 기온에 맞는 추천 옷차림 테이블 찾기
+                // TODO : 같은 값일 때 어떻게 할걸데? 그 부분 수정하기...
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(Integer.valueOf(dataSnapshot.getKey()));
                     if ( arrayList.get(i) >= currentCel ) {
@@ -221,14 +224,25 @@ public class RecommendActivity extends AppCompatActivity {
                     bottom.add((String) dataSnapshot.getValue());
                 }
 
-                System.out.println( outer.get( random.nextInt(outer.size()) ) );
-                System.out.println( top.get( random.nextInt(top.size()) ) );
-                System.out.println( bottom.get( random.nextInt(bottom.size()) ) );
+                // 랜덤으로 옷 들고오기 (사용자 데이터 고려x)
+                String strOuter = outer.get( random.nextInt(outer.size()) );
+                String strTop = top.get( random.nextInt(top.size()) );
+                String strBottom = bottom.get( random.nextInt(bottom.size()) );
+                System.out.println(strOuter); System.out.println(strTop); System.out.println(strBottom);
+
+                // 화면 출력
+                txtOuter = findViewById(R.id.textViewOuter);
+                txtTop = findViewById(R.id.textViewTop);
+                txtBottom = findViewById(R.id.textViewBottom);
+                txtOuter.setText(strOuter);
+                txtTop.setText(strTop);
+                txtBottom.setText(strBottom);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("Recommend Error", String.valueOf(error)); // 에러문 출력
             }
         });
     }
