@@ -206,20 +206,20 @@ public class RecommendActivity extends AppCompatActivity {
                 }
 
                 // 현재 기온에 맞는 추천 옷차림을 따로 배열에 할당
-                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(current[0])).child("Outer").getChildren() ) {
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Outer").getChildren() ) {
 //                    System.out.println(dataSnapshot.getValue());
                     outer.add((String) dataSnapshot.getValue());
                 }
-                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(current[0])).child("Top").getChildren() ) {
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Top").getChildren() ) {
 //                    System.out.println(dataSnapshot.getValue());
                     top.add((String) dataSnapshot.getValue());
                 }
-                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(current[0])).child("Bottom").getChildren() ) {
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Bottom").getChildren() ) {
 //                    System.out.println(dataSnapshot.getValue());
                     bottom.add((String) dataSnapshot.getValue());
                 }
 
-
+                System.out.println(outer.get(1));
             }
 
             @Override
