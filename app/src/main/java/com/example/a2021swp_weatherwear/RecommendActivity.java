@@ -27,8 +27,6 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
-    private String year, month, day;
-
     private String strNick;
 
     TextView timer;
@@ -37,10 +35,8 @@ public class RecommendActivity extends AppCompatActivity {
     TextView time3;
     TextView time4;
 
-
     TextView weather_text;
     String weather_data;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
