@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -172,7 +173,7 @@ public class RecommendActivity extends AppCompatActivity {
                 }
             }
         };
-        thread.start();
+//        thread.start();
 
         recommendGarment(currentCel);
     }
@@ -183,6 +184,7 @@ public class RecommendActivity extends AppCompatActivity {
         ArrayList<String> outer = new ArrayList<>();
         ArrayList<String> top = new ArrayList<>();
         ArrayList<String> bottom = new ArrayList<>();
+        Random random = new Random();
         final int[] current = new int[1];
 
         firebaseDatabase = FirebaseDatabase.getInstance();  // 파이어베이스 DB 연동
@@ -194,7 +196,7 @@ public class RecommendActivity extends AppCompatActivity {
                 arrayList.clear();
                 int i = 0;
 
-                // 현재 기온에 맞는 추천 옷차림 테이블 찾
+                // 현재 기온에 맞는 추천 옷차림 테이블 찾기
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(Integer.valueOf(dataSnapshot.getKey()));
                     if ( arrayList.get(i) >= currentCel ) {
@@ -219,7 +221,9 @@ public class RecommendActivity extends AppCompatActivity {
                     bottom.add((String) dataSnapshot.getValue());
                 }
 
-                System.out.println(outer.get(1));
+                System.out.println( outer.get( random.nextInt(outer.size()) ) );
+                System.out.println( top.get( random.nextInt(top.size()) ) );
+                System.out.println( bottom.get( random.nextInt(bottom.size()) ) );
             }
 
             @Override
