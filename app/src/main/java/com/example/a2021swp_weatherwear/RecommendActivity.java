@@ -213,8 +213,13 @@ public class RecommendActivity extends AppCompatActivity {
                 // TODO : 같은 값일 때 어떻게 할걸데? 그 부분 수정하기...
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(Integer.valueOf(dataSnapshot.getKey()));
-                    if ( arrayList.get(i) >= currentCel ) {
+                    if ( arrayList.get(i) > currentCel ) {
                         current[0] = i - 1;
+                        System.out.println(current[0]);
+                        break;
+                    }
+                    else if ( arrayList.get(i) == currentCel ) {
+                        current[0] = i;
                         System.out.println(current[0]);
                         break;
                     }
