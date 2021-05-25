@@ -189,7 +189,6 @@
                 android:layout_height="wrap_content"
                 android:background="#FFEB3B"
                 android:padding="20dp"
-                android:text="22'C"
                 android:textSize="40sp" />
         </LinearLayout>
 
