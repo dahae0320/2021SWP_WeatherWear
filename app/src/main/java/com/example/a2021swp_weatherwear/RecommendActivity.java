@@ -2,11 +2,15 @@ package com.example.a2021swp_weatherwear;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -19,15 +23,41 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.Random;
+
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.Date;
+
 
 public class RecommendActivity extends AppCompatActivity {
     FloatingActionMenu fabMenu;
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
+    TextView weatherTemp;
+
+    // 현재 날짜
+    private String year, month, day;
+
+
+    // 옷차림 추천 관련 변수들
+    private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
+    private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
+    private DatabaseReference databaseReference, databaseReferenceLike;
+    private TextView txtOuter, txtTop, txtBottom;
+
     private String strNick;
+
+    long systemTime = System.currentTimeMillis();
 
     TextView timer;
     TextView time1;
@@ -37,6 +67,12 @@ public class RecommendActivity extends AppCompatActivity {
 
     TextView weather_text;
     String weather_data;
+
+    // 현재 시스템 시간 구하기
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+    // 출력 형태를 위한 formmater
+    String dTime = formatter.format(systemTime);
+    // format에 맞게 출력하기 위한 문자열 변환
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +84,31 @@ public class RecommendActivity extends AppCompatActivity {
         fabCloset = findViewById(R.id.fabCloset);
         fabLikelist = findViewById(R.id.fabLikelist);
 
+        fabCloset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
+                //이미지 상의 의류 추가 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                startActivity(i1);
+            }
+        });
+
+        fabLikelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i3 = new Intent(RecommendActivity.this, LikeActivity.class);
+                //이미지 상의 좋아요 확인 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                startActivity(i3);
+            }
+        });
+
         // 좋아요 버튼
         final Button favBtn = findViewById(R.id.favBtn);
         favBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 favBtn.setSelected(true);
+                saveLikeGarment();
             }
         });
 
@@ -120,6 +175,12 @@ public class RecommendActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Calendar calendar = Calendar.getInstance(); // 날짜 변수
+
+//                             year = String.valueOf(calendar.get(Calendar.YEAR));
+//                             month = 0 + String.valueOf(calendar.get(Calendar.MONTH) + 1);
+//                             day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+                            
+
                             int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
                             if (hour == 12) {
@@ -154,6 +215,7 @@ public class RecommendActivity extends AppCompatActivity {
                                 time2.setText("오전 " + (hour - 20) + "시");
                             } else {
                                 time2.setText("오후 " + (hour - 8) + "시");
+
                             }
 
                             //6시간 뒤 시각
@@ -188,6 +250,116 @@ public class RecommendActivity extends AppCompatActivity {
                 }
             }
         };
-        thread.start();
+//        thread.start();
+
+        // 옷차림 추천
+        recommendGarment(currentCel);
+
+        // 옷차림 추천 새로고침
+        final ImageButton btnRefresh = findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recommendGarment(currentCel);
+            }
+        });
+    }
+
+    // 좋아요 누를 시 옷차림 저장
+    private void saveLikeGarment() {
+        Random random = new Random();
+        firebaseDatabaseLike = FirebaseDatabase.getInstance();
+        // TODO : User2는 실제 사용자 데이터를 불러올 수 있도록 한다.
+        databaseReferenceLike = firebaseDatabaseLike.getReference("User").child("User2").child("Like").child(String.valueOf(random.nextInt()));
+
+        databaseReferenceLike.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txtOuter = findViewById(R.id.textViewOuter);
+                txtTop = findViewById(R.id.textViewTop);
+                txtBottom = findViewById(R.id.textViewBottom);
+
+                databaseReferenceLike.child("outer").setValue(txtOuter.getText().toString());
+                databaseReferenceLike.child("top").setValue(txtTop.getText().toString());
+                databaseReferenceLike.child("bottom").setValue(txtBottom.getText().toString());
+                Toast.makeText(RecommendActivity.this, "좋아요 완료!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Like Error", String.valueOf(error)); // 에러문 출력
+            }
+        });
+    }
+
+    // 옷차림 추천 메소드
+    private void recommendGarment(int currentCel) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        ArrayList<String> outer = new ArrayList<>();
+        ArrayList<String> top = new ArrayList<>();
+        ArrayList<String> bottom = new ArrayList<>();
+        Random random = new Random();
+        final int[] current = new int[1];
+
+        firebaseDatabase = FirebaseDatabase.getInstance();  // 파이어베이스 DB 연동
+        databaseReference = firebaseDatabase.getReference("GarmentTemperature");   // DB 데이블 연결
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.clear();
+                int i = 0;
+
+                // 현재 기온에 맞는 추천 옷차림 테이블 찾기
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    arrayList.add(Integer.valueOf(dataSnapshot.getKey()));
+                    if ( arrayList.get(i) > currentCel ) {
+                        current[0] = i - 1;
+                        System.out.println(current[0]);
+                        break;
+                    }
+                    else if ( arrayList.get(i) == currentCel ) {
+                        current[0] = i;
+                        System.out.println(current[0]);
+                        break;
+                    }
+                    i++;
+                }
+
+                // 현재 기온에 맞는 추천 옷차림을 따로 배열에 할당
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Outer").getChildren() ) {
+//                    System.out.println(dataSnapshot.getValue());
+                    outer.add((String) dataSnapshot.getValue());
+                }
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Top").getChildren() ) {
+//                    System.out.println(dataSnapshot.getValue());
+                    top.add((String) dataSnapshot.getValue());
+                }
+                for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Bottom").getChildren() ) {
+//                    System.out.println(dataSnapshot.getValue());
+                    bottom.add((String) dataSnapshot.getValue());
+                }
+
+                // 랜덤으로 옷 들고오기 (사용자 데이터 고려x)
+                String strOuter = outer.get( random.nextInt(outer.size()) );
+                String strTop = top.get( random.nextInt(top.size()) );
+                String strBottom = bottom.get( random.nextInt(bottom.size()) );
+                System.out.println(strOuter); System.out.println(strTop); System.out.println(strBottom);
+
+                // 화면 출력
+                txtOuter = findViewById(R.id.textViewOuter);
+                txtTop = findViewById(R.id.textViewTop);
+                txtBottom = findViewById(R.id.textViewBottom);
+                txtOuter.setText(strOuter);
+                txtTop.setText(strTop);
+                txtBottom.setText(strBottom);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 디비를 가져오던중 에러 발생 시
+                Log.e("Recommend Error", String.valueOf(error)); // 에러문 출력
+            }
+        });
     }
 }

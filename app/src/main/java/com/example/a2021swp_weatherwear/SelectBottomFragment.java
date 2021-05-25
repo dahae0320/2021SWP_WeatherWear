@@ -131,15 +131,8 @@ public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // 클릭을 할떄 이미 데이터가 있는지 확인하기. 없으면 저장, 있으면 삭제!
-//                if ( getUserOuterData(position) ) {  // 데이터가 이미 있음!!
-//                    databaseReferenceAdd.child(String.valueOf(position)).removeValue();
-//                    System.out.println("데이터 삭제한당!");
-//                } else {
-//                    databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
-//                    System.out.println("데이터 저장할게~");
-//                }
-                databaseReferenceAdd.child(String.valueOf(position)).setValue("test test");
+                String str = viewHolder.TxtOuter.getText().toString();
+                databaseReferenceAdd.child(String.valueOf(position)).setValue(str);
             }
 
             @Override
