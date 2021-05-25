@@ -14,7 +14,7 @@ public class WeatherApi {
         StringBuffer buffer = new StringBuffer();
 
         String endPoint = "http://apis.data.go.kr/1360000/VilageFcstInfoService/";
-        String serviceKey = "sCyFo%2FDKOLW9l1EHk%2BlA0zwanD%2FpAjUbgIhgU5erOQKEcKoh6PUjl%2B%2FQ1WARH4AksQh3sl6FU%2Ff9buPEMK20Rw%3D%3D";
+        String serviceKey = "A7FY4Hj7JXPBdELMhYfwdg2RWlyWhiBsx0gogIIYynF%2BblUZfVxDn6gVCQ9uTDUpEPEqfCZ%2B2FW0jXJOYXFo5Q%3D%3D";
         String pageNo = "1";
         String numOfRows = "10";
         String baseDate = getDate; // 원하는 날짜
