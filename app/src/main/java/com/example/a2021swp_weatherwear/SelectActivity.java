@@ -13,6 +13,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.kakao.auth.ApiResponseCallback;
+import com.kakao.auth.AuthService;
+import com.kakao.auth.network.response.AccessTokenInfoResponse;
+import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
@@ -22,7 +28,10 @@ public class SelectActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getSimpleName();
     Context mContext;
 
-    Button btnLogout;
+    private long id;
+
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     private ViewPager2 mViewPager;
     private ViewPageAdaptor myPagerAdapter;
@@ -41,13 +50,15 @@ public class SelectActivity extends AppCompatActivity {
         mContext = SelectActivity.this;
         backPressHandler = new BackPressHandler(this);
 
-        //code = getIntent().getExtras().getString("code"); // 다른 Activity에서 값을 넘겨 받았을 때
+//        code = getIntent().getExtras().getString("code"); // 다른 Activity에서 값을 넘겨 받았을 때
         code = "";
         Log.e(TAG, code);
 
-        Fragment frag1 = new SelectOuterFragment().newInstance(code,"");
-        Fragment frag2 = new SelectTopFragment().newInstance(code,"");
-        Fragment frag3 = new SelectBottomFragment().newInstance(code,"");
+        requestAccessTokenInfo();
+
+        Fragment frag1 = new SelectOuterFragment().newInstance(code, "");
+        Fragment frag2 = new SelectTopFragment().newInstance(code, "");
+        Fragment frag3 = new SelectBottomFragment().newInstance(code, "");
 
         mViewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
@@ -77,6 +88,35 @@ public class SelectActivity extends AppCompatActivity {
                 });
             }
         });
+    }
 
+    private void requestAccessTokenInfo() {
+        // 사용자 토큰 요청
+        AuthService.getInstance().requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+            }
+
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Log.e("KAKAO_API", "토큰 정보 요청 실패: " + errorResult);
+            }
+
+            @Override
+            public void onSuccess(AccessTokenInfoResponse result) {
+                id = result.getUserId();
+                Log.i("KAKAO_API", "사용자 아이디: " + id);
+
+//                databaseReference.child("User").child(String.valueOf(id)).setValue("hi");
+
+//                findViewById(R.id.btnAdd).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        databaseReference.child("user").child(String.valueOf(id)).child("Top").child("1").setValue("니트");
+//                    }
+//                });
+            }
+        });
     }
 }
