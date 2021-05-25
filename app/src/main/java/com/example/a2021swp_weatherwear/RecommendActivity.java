@@ -93,7 +93,6 @@ public class RecommendActivity extends AppCompatActivity {
                 startActivity(i1);
             }
         });
-
         fabLikelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,24 +109,6 @@ public class RecommendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 favBtn.setSelected(true);
                 saveLikeGarment();
-            }
-        });
-
-        fabCloset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
-                //이미지 상의 의류 추가 버튼을 누르면 SelectActivity 화면으로 이동한다.
-                startActivity(i1);
-            }
-        });
-
-        fabLikelist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i3 = new Intent(RecommendActivity.this, LikeActivity.class);
-                //이미지 상의 좋아요 확인 버튼을 누르면 SelectActivity 화면으로 이동한다.
-                startActivity(i3);
             }
         });
 
@@ -177,11 +158,6 @@ public class RecommendActivity extends AppCompatActivity {
                         public void run() {
                             Calendar calendar = Calendar.getInstance(); // 날짜 변수
 
-//                             year = String.valueOf(calendar.get(Calendar.YEAR));
-//                             month = 0 + String.valueOf(calendar.get(Calendar.MONTH) + 1);
-//                             day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-                            
-
                             int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
                             if (hour == 12) {
@@ -193,6 +169,7 @@ public class RecommendActivity extends AppCompatActivity {
                             } else {
                                 timer.setText("현재 시각\n" + "오전 " + hour + "시 ");
                             }
+
                             // 2시간뒤 시각
                             if (hour <= 9) {
                                 time1.setText("오전 " + (hour + 2) + "시");
@@ -205,6 +182,7 @@ public class RecommendActivity extends AppCompatActivity {
                             } else {
                                 time1.setText("오후 " + (hour - 10) + "시");
                             }
+
                             // 4시간 뒤 시간
                             if (hour <= 7) {
                                 time2.setText("오전 " + (hour + 4) + "시");
@@ -251,7 +229,7 @@ public class RecommendActivity extends AppCompatActivity {
                 }
             }
         };
-//        thread.start();
+        thread.start();
 
         // 옷차림 추천
         recommendGarment(currentCel);
