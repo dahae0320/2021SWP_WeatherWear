@@ -34,6 +34,7 @@ public class SelectTopFragment extends Fragment implements TopTextAdaptor.OnList
     private FirebaseDatabase database, databaseAdd;
     private DatabaseReference databaseReference, databaseReferenceAdd;
     private TopTextAdaptor mAdaptor;
+    private static String userNick;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,12 +58,13 @@ public class SelectTopFragment extends Fragment implements TopTextAdaptor.OnList
      * @return A new instance of fragment SelectTopFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectTopFragment newInstance(String param1, String param2) {
+    public static SelectTopFragment newInstance(String param1, String param2, String nick) {
         SelectTopFragment fragment = new SelectTopFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        userNick = nick;
         return fragment;
     }
 
@@ -124,7 +126,7 @@ public class SelectTopFragment extends Fragment implements TopTextAdaptor.OnList
         // DB 연결
         databaseAdd = FirebaseDatabase.getInstance();
         // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
-        databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Top");
+        databaseReferenceAdd = databaseAdd.getReference("User").child(userNick).child("Top");
 
         // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 할
         databaseReferenceAdd.addValueEventListener(new ValueEventListener() {

@@ -27,25 +27,26 @@ public class SelectActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     Context mContext;
-
     private long id;
-
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
-
     private ViewPager2 mViewPager;
     private ViewPageAdaptor myPagerAdapter;
     private TabLayout tabLayout;
-
     private String[] titles = new String[]{"Outer", "Top", "Bottom"};
-
     String code;
     private BackPressHandler backPressHandler;
+    String userNick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
+
+        // 사용자 이름 받아옴.
+        Intent intent = getIntent();
+        userNick = intent.getStringExtra("strNick");
+//        System.out.println("select에서 사용자 이름 : " + userNick);
 
         mContext = SelectActivity.this;
         backPressHandler = new BackPressHandler(this);
@@ -54,11 +55,9 @@ public class SelectActivity extends AppCompatActivity {
         code = "";
         Log.e(TAG, code);
 
-        requestAccessTokenInfo();
-
-        Fragment frag1 = new SelectOuterFragment().newInstance(code, "");
-        Fragment frag2 = new SelectTopFragment().newInstance(code, "");
-        Fragment frag3 = new SelectBottomFragment().newInstance(code, "");
+        Fragment frag1 = new SelectOuterFragment().newInstance(code, "", userNick);
+        Fragment frag2 = new SelectTopFragment().newInstance(code, "", userNick);
+        Fragment frag3 = new SelectBottomFragment().newInstance(code, "", userNick);
 
         mViewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
@@ -86,36 +85,6 @@ public class SelectActivity extends AppCompatActivity {
 
                     }
                 });
-            }
-        });
-    }
-
-    private void requestAccessTokenInfo() {
-        // 사용자 토큰 요청
-        AuthService.getInstance().requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
-            }
-
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                Log.e("KAKAO_API", "토큰 정보 요청 실패: " + errorResult);
-            }
-
-            @Override
-            public void onSuccess(AccessTokenInfoResponse result) {
-                id = result.getUserId();
-                Log.i("KAKAO_API", "사용자 아이디: " + id);
-
-//                databaseReference.child("User").child(String.valueOf(id)).setValue("hi");
-
-//                findViewById(R.id.btnAdd).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        databaseReference.child("user").child(String.valueOf(id)).child("Top").child("1").setValue("니트");
-//                    }
-//                });
             }
         });
     }
