@@ -15,22 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
 
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,12 +33,6 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionMenu fabMenu;
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
-
-    TextView weatherTemp;
-
-    // 현재 날짜
-    private String year, month, day;
-
 
     // 옷차림 추천 관련 변수들
     private Integer currentCel = 18; // 현재 기온 변수 (임의로 지정함)
