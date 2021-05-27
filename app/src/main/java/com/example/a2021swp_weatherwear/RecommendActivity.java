@@ -51,7 +51,7 @@ public class RecommendActivity extends AppCompatActivity {
 
 
     // 옷차림 추천 관련 변수들
-    private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
+    private Integer currentCel = 18; // 현재 기온 변수 (임의로 지정함)
     private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
     private DatabaseReference databaseReference, databaseReferenceLike;
     private TextView txtOuter, txtTop, txtBottom;
@@ -145,91 +145,90 @@ public class RecommendActivity extends AppCompatActivity {
         System.out.println(getDate);
         System.out.println(getTime);
 
-        Thread thread = new Thread() {
-
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!isInterrupted()) {
 
-                   weather_data = WeatherApi.getWeatherData(getDate, getTime);
+                weather_data = WeatherApi.getWeatherData(getDate, getTime);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Calendar calendar = Calendar.getInstance(); // 날짜 변수
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                            int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
+                        Calendar calendar = Calendar.getInstance(); // 날짜 변수
 
-                            if (hour == 12) {
-                                timer.setText("현재 시각\n" + "오후 12시 ");
-                            } else if (hour == 0) {
-                                timer.setText("현재 시각\n" + "오전 12시 ");
-                            } else if (hour >= 13) {
-                                timer.setText("현재 시각\n" + "오후 " + (hour - 12) + "시 ");
-                            } else {
-                                timer.setText("현재 시각\n" + "오전 " + hour + "시 ");
-                            }
+                        int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
-                            // 2시간뒤 시각
-                            if (hour <= 9) {
-                                time1.setText("오전 " + (hour + 2) + "시");
-                            } else if (hour == 10) {
-                                time1.setText("오후 " + 12 + "시");
-                            } else if (hour == 22) {
-                                time1.setText("오전 " + 12 + "시");
-                            } else if (hour >= 23) {
-                                time1.setText("오전 " + (hour - 22) + "시");
-                            } else {
-                                time1.setText("오후 " + (hour - 10) + "시");
-                            }
-
-                            // 4시간 뒤 시간
-                            if (hour <= 7) {
-                                time2.setText("오전 " + (hour + 4) + "시");
-                            } else if (hour == 8) {
-                                time2.setText("오후 " + 12 + "시");
-                            } else if (hour == 20) {
-                                time2.setText("오전 " + 12 + "시");
-                            } else if (hour >= 21) {
-                                time2.setText("오전 " + (hour - 20) + "시");
-                            } else {
-                                time2.setText("오후 " + (hour - 8) + "시");
-
-                            }
-
-                            //6시간 뒤 시각
-                            if (hour <= 5) {
-                                time3.setText("오전 " + (hour + 6) + "시");
-                            } else if (hour == 6) {
-                                time3.setText("오후 " + 12 + "시");
-                            } else if (hour == 18) {
-                                time3.setText("오전 " + 12 + "시");
-                            } else if (hour >= 19) {
-                                time3.setText("오전 " + (hour - 18) + "시");
-                            } else {
-                                time3.setText("오후 " + (hour - 6) + "시");
-                            }
-
-                            // 8시간 뒤 시각
-                            if (hour <= 3) {
-                                time4.setText("오전 " + (hour + 8) + "시");
-                            } else if (hour == 4) {
-                                time4.setText("오후 " + 12 + "시");
-                            } else if (hour == 16) {
-                                time4.setText("오전 " + 12 + "시");
-                            } else if (hour >= 17) {
-                                time4.setText("오전 " + (hour - 16) + "시");
-                            } else {
-                                time4.setText("오후 " + (hour - 4) + "시");
-                            }
-
-                            weather_text.setText(weather_data + "°C");
+                        // 현재 시각
+                        if (hour == 12) {
+                            timer.setText("현재 시각\n" + "오후 12시 ");
+                        } else if (hour == 0) {
+                            timer.setText("현재 시각\n" + "오전 12시 ");
+                        } else if (hour >= 13) {
+                            timer.setText("현재 시각\n" + "오후 " + (hour - 12) + "시 ");
+                        } else {
+                            timer.setText("현재 시각\n" + "오전 " + hour + "시 ");
                         }
-                    });
-                }
+
+                        // 2시간뒤 시각
+                        if (hour <= 9) {
+                            time1.setText("오전 " + (hour + 2) + "시");
+                        } else if (hour == 10) {
+                            time1.setText("오후 " + 12 + "시");
+                        } else if (hour == 22) {
+                            time1.setText("오전 " + 12 + "시");
+                        } else if (hour >= 23) {
+                            time1.setText("오전 " + (hour - 22) + "시");
+                        } else {
+                            time1.setText("오후 " + (hour - 10) + "시");
+                        }
+
+                        // 4시간 뒤 시간
+                        if (hour <= 7) {
+                            time2.setText("오전 " + (hour + 4) + "시");
+                        } else if (hour == 8) {
+                            time2.setText("오후 " + 12 + "시");
+                        } else if (hour == 20) {
+                            time2.setText("오전 " + 12 + "시");
+                        } else if (hour >= 21) {
+                            time2.setText("오전 " + (hour - 20) + "시");
+                        } else {
+                            time2.setText("오후 " + (hour - 8) + "시");
+
+                        }
+
+                        //6시간 뒤 시각
+                        if (hour <= 5) {
+                            time3.setText("오전 " + (hour + 6) + "시");
+                        } else if (hour == 6) {
+                            time3.setText("오후 " + 12 + "시");
+                        } else if (hour == 18) {
+                            time3.setText("오전 " + 12 + "시");
+                        } else if (hour >= 19) {
+                            time3.setText("오전 " + (hour - 18) + "시");
+                        } else {
+                            time3.setText("오후 " + (hour - 6) + "시");
+                        }
+
+                        // 8시간 뒤 시각
+                        if (hour <= 3) {
+                            time4.setText("오전 " + (hour + 8) + "시");
+                        } else if (hour == 4) {
+                            time4.setText("오후 " + 12 + "시");
+                        } else if (hour == 16) {
+                            time4.setText("오전 " + 12 + "시");
+                        } else if (hour >= 17) {
+                            time4.setText("오전 " + (hour - 16) + "시");
+                        } else {
+                            time4.setText("오후 " + (hour - 4) + "시");
+                        }
+
+                        weather_text.setText(weather_data + "°C");
+
+                    }
+                });
             }
-        };
-        thread.start();
+        }).start();
 
         // 옷차림 추천
         recommendGarment(currentCel);
