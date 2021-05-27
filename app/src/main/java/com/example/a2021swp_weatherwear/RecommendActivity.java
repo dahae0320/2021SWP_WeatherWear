@@ -45,7 +45,7 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabLikelist;
 
     // 옷차림 추천 관련 변수들
-    private Integer currentCel = 18; // 현재 기온 변수 (임의로 지정함)
+    private Integer currentCel = 22; // 현재 기온 변수 (임의로 지정함)
     private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
     private DatabaseReference databaseReference, databaseReferenceLike;
     private TextView txtOuter, txtTop, txtBottom;

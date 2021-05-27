@@ -1,6 +1,5 @@
 package com.example.a2021swp_weatherwear;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -23,10 +22,8 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.exception.KakaoException;
-import com.kakao.util.helper.Utility;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
