@@ -72,6 +72,7 @@ public class WeatherApi {
                 }
                 eventType = xpp.next();
             }
+
         } catch (Exception e) {
 
         }
