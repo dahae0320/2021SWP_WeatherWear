@@ -56,10 +56,8 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
-    TextView weatherTemp;
-
     // 옷차림 추천 관련 변수들
-    private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
+    private double currentCel; // 현재 기온 변수 (임의로 지정함)
     private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike, firebaseDatabaseUser;
     private DatabaseReference databaseReference, databaseReferenceLike, databaseReferenceUser;
 
@@ -112,7 +110,6 @@ public class RecommendActivity extends AppCompatActivity {
         Intent intent = getIntent();
         strNick = intent.getStringExtra("name");
         TextView tv_name = findViewById(R.id.text_name);
-        // name set
         tv_name.setText(strNick);
 
         // 플로팅 버튼
@@ -246,9 +243,9 @@ public class RecommendActivity extends AppCompatActivity {
                 weather_text3 = findViewById(R.id.txtBeforeCelsius3);
                 weather_text4 = findViewById(R.id.txtBeforeCelsius4);
 
-              // master
+                // master
                 currentCel = Double.parseDouble(weather_data);
-                System.out.println(currentCel);
+                Log.i("현재 기온 : ", String.valueOf(weather_data));
 
 
                 runOnUiThread(new Runnable() {

@@ -46,12 +46,10 @@ public class SelectActivity extends AppCompatActivity {
         // 사용자 이름 받아옴.
         Intent intent = getIntent();
         userNick = intent.getStringExtra("strNick");
-//        System.out.println("select에서 사용자 이름 : " + userNick);
 
         mContext = SelectActivity.this;
         backPressHandler = new BackPressHandler(this);
 
-//        code = getIntent().getExtras().getString("code"); // 다른 Activity에서 값을 넘겨 받았을 때
         code = "";
         Log.e(TAG, code);
 

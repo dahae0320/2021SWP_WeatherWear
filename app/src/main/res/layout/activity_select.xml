@@ -50,15 +50,6 @@
         android:layout_marginBottom="20dp">
 
         <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="추가하기"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/AddYellow"/>
-
-        <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
