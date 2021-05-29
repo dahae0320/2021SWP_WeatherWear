@@ -45,7 +45,7 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabLikelist;
 
     // 옷차림 추천 관련 변수들
-    private Integer currentCel = 22; // 현재 기온 변수 (임의로 지정함)
+    private double currentCel; // 현재 기온 변수
     private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
     private DatabaseReference databaseReference, databaseReferenceLike;
     private TextView txtOuter, txtTop, txtBottom;
@@ -144,6 +144,8 @@ public class RecommendActivity extends AppCompatActivity {
             public void run() {
 
                 weather_data = WeatherApi.getWeatherData(getDate, getTime);
+                currentCel = Double.parseDouble(weather_data);
+                System.out.println(currentCel);
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -265,7 +267,7 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     // 옷차림 추천 메소드
-    private void recommendGarment(int currentCel) {
+    private void recommendGarment(double currentCel) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         ArrayList<String> outer = new ArrayList<>();
         ArrayList<String> top = new ArrayList<>();
