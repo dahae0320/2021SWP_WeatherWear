@@ -317,7 +317,7 @@ public class RecommendActivity extends AppCompatActivity {
                     i++;
                 }
 
-                // 현재 기온에 맞는 추천 옷차림을 따로 배열에 할당
+                // 현재 기온에 맞는 추천 옷차림을 따로 배열에 할당, 사용자가 가지지 않은 옷이면 배열에 저장되지 않음
                 for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Outer").getChildren() ) {
 //                    System.out.println(dataSnapshot.getValue());
                     if (userOuter.contains(dataSnapshot.getValue().toString())) {
@@ -347,7 +347,7 @@ public class RecommendActivity extends AppCompatActivity {
                     bottom.add("저장된 옷이 없음");
                 }
 
-                // 랜덤으로 옷 들고오기 (사용자 데이터 고려x)
+                // 랜덤으로 옷 들고오기 (사용자 데이터 고려함)
                 String strOuter = outer.get( random.nextInt(outer.size()) );
                 String strTop = top.get( random.nextInt(top.size()) );
                 String strBottom = bottom.get( random.nextInt(bottom.size()) );
