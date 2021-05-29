@@ -56,12 +56,6 @@ public class RecommendActivity extends AppCompatActivity {
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
-    // 옷차림 추천 관련 변수들
-    private Integer currentCel = 22; // 현재 기온 변수 (임의로 지정함)
-    private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
-    private DatabaseReference databaseReference, databaseReferenceLike;
-    private TextView txtOuter, txtTop, txtBottom;
-
     TextView weatherTemp;
 
     // 옷차림 추천 관련 변수들
@@ -101,9 +95,6 @@ public class RecommendActivity extends AppCompatActivity {
     String weatherLow;
     //최고 기온
     String weatherHigh;
-
-    String weather_data;
-
 
     // 현재 시스템 시간 구하기
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
@@ -146,23 +137,6 @@ public class RecommendActivity extends AppCompatActivity {
             }
         });
 
-        fabCloset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
-                //이미지 상의 의류 추가 버튼을 누르면 SelectActivity 화면으로 이동한다.
-                startActivity(i1);
-            }
-        });
-        fabLikelist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i3 = new Intent(RecommendActivity.this, LikeActivity.class);
-                //이미지 상의 좋아요 확인 버튼을 누르면 SelectActivity 화면으로 이동한다.
-                startActivity(i3);
-            }
-        });
-
         // 좋아요 버튼
         final Button favBtn = findViewById(R.id.favBtn);
         favBtn.setOnClickListener(new View.OnClickListener() {
@@ -174,19 +148,6 @@ public class RecommendActivity extends AppCompatActivity {
         });
 
         // 시간 및 기온 출력
-        weather_text = findViewById(R.id.tv);
-        timer = findViewById(R.id.textView2);
-        time1 = findViewById(R.id.txtBeforeTime1);
-        time2 = findViewById(R.id.txtBeforeTime2);
-        time3 = findViewById(R.id.txtBeforeTime3);
-        time4 = findViewById(R.id.txtBeforeTime4);
-
-        String now = new DataLoader().DateLoader(-1);
-        String getDate = now.substring(0, 8);
-
-        int min = Integer.parseInt(now.substring(11, 13));
-        String getTime;
-
         weather_text = findViewById(R.id.tv);
         weather_text5 = findViewById(R.id.textView1);
         timer = findViewById(R.id.textView2);
@@ -244,7 +205,6 @@ public class RecommendActivity extends AppCompatActivity {
         System.out.println(getTime3);
         System.out.println(getTime4);
 
-
         //최저기온 정수형 변환
         float low_number;
         //최고기온 정수형 변환
@@ -254,8 +214,8 @@ public class RecommendActivity extends AppCompatActivity {
         weatherHigh =  WeatherApi.getWeatherData(getDate, "HH14");
 
         //문자형을 정수형으로 바꿔준다.
-        low_number = Float.parseFloat(weatherLow);
-        high_number = Float.parseFloat(weatherHigh);
+//        low_number = Float.parseFloat(weatherLow);
+//        high_number = Float.parseFloat(weatherHigh);
 
 //        if((high_number - low_number) >= 10)
 //        {
@@ -266,7 +226,7 @@ public class RecommendActivity extends AppCompatActivity {
 //            weather_text5.setText(" ");
 //        }
 
-        Log.i("low_number", String.valueOf(low_number));
+//        Log.i("low_number", String.valueOf(low_number));
 
         new Thread(new Runnable() {
             @Override
@@ -283,8 +243,6 @@ public class RecommendActivity extends AppCompatActivity {
                 weather_text3 = findViewById(R.id.txtBeforeCelsius3);
                 weather_text4 = findViewById(R.id.txtBeforeCelsius4);
                 //최고 최저 텍스트 출력 및 날씨 정보 출력
-
-
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -363,26 +321,11 @@ public class RecommendActivity extends AppCompatActivity {
                         weather_text2.setText(weather_data2 + "°C");
                         weather_text3.setText(weather_data3 + "°C");
                         weather_text4.setText(weather_data4 + "°C");
-
-
                     }
                 });
 
             }
         }).start();
-
-        // 옷차림 추천
-        recommendGarment(currentCel);
-
-        // 옷차림 추천 새로고침
-        final ImageButton btnRefresh = findViewById(R.id.btnRefresh);
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recommendGarment(currentCel);
-            }
-        };
-        thread.start();
 
         // 옷차림 추천
         recommendGarment(currentCel);
