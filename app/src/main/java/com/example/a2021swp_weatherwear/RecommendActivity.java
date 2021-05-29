@@ -38,14 +38,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Document;
+
 import java.util.Date;
 
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 
 public class RecommendActivity extends AppCompatActivity {
     FloatingActionMenu fabMenu;
     FloatingActionButton fabCloset;
     FloatingActionButton fabLikelist;
 
+    // 옷차림 추천 관련 변수들
+    private Integer currentCel = 22; // 현재 기온 변수 (임의로 지정함)
+    private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike;
+    private DatabaseReference databaseReference, databaseReferenceLike;
+    private TextView txtOuter, txtTop, txtBottom;
 
     TextView weatherTemp;
 
@@ -57,6 +72,8 @@ public class RecommendActivity extends AppCompatActivity {
 
     private String strNick;
 
+    Document doc = null;
+
     long systemTime = System.currentTimeMillis();
 
     TextView timer;
@@ -66,7 +83,27 @@ public class RecommendActivity extends AppCompatActivity {
     TextView time4;
 
     TextView weather_text;
+
+    TextView weather_text1;
+    TextView weather_text2;
+    TextView weather_text3;
+    TextView weather_text4;
+    //최고 최저 기온 연관 알림, 날씨 알림
+    TextView weather_text5;
+
     String weather_data;
+    String weather_data1;
+    String weather_data2;
+    String weather_data3;
+    String weather_data4;
+
+    //최저 기온
+    String weatherLow;
+    //최고 기온
+    String weatherHigh;
+
+    String weather_data;
+
 
     // 현재 시스템 시간 구하기
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
@@ -109,6 +146,23 @@ public class RecommendActivity extends AppCompatActivity {
             }
         });
 
+        fabCloset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(RecommendActivity.this, SelectActivity.class);
+                //이미지 상의 의류 추가 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                startActivity(i1);
+            }
+        });
+        fabLikelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i3 = new Intent(RecommendActivity.this, LikeActivity.class);
+                //이미지 상의 좋아요 확인 버튼을 누르면 SelectActivity 화면으로 이동한다.
+                startActivity(i3);
+            }
+        });
+
         // 좋아요 버튼
         final Button favBtn = findViewById(R.id.favBtn);
         favBtn.setOnClickListener(new View.OnClickListener() {
@@ -133,100 +187,199 @@ public class RecommendActivity extends AppCompatActivity {
         int min = Integer.parseInt(now.substring(11, 13));
         String getTime;
 
+        weather_text = findViewById(R.id.tv);
+        weather_text5 = findViewById(R.id.textView1);
+        timer = findViewById(R.id.textView2);
+        time1 = findViewById(R.id.txtBeforeTime1);
+        time2 = findViewById(R.id.txtBeforeTime2);
+        time3 = findViewById(R.id.txtBeforeTime3);
+        time4 = findViewById(R.id.txtBeforeTime4);
+
+        String now = new DataLoader().DateLoader(-1);
+        String getDate = now.substring(0, 8);
+
+        int min = Integer.parseInt(now.substring(11, 13));
+        String getTime;
+        String getTime1;
+        String getTime2;
+        String getTime3;
+        String getTime4;
+
         if (min >= 30) {
             Date mDate = new Date(System.currentTimeMillis());
+
             SimpleDateFormat simpleDate = new SimpleDateFormat("HH00");
+            SimpleDateFormat simpleDate1 = new SimpleDateFormat("HH02");
+            SimpleDateFormat simpleDate2 = new SimpleDateFormat("HH04");
+            SimpleDateFormat simpleDate3 = new SimpleDateFormat("HH06");
+            SimpleDateFormat simpleDate4 = new SimpleDateFormat("HH08");
             getTime = simpleDate.format(mDate);
+            getTime1 = simpleDate1.format(mDate);
+            getTime2 = simpleDate2.format(mDate);
+            getTime3 = simpleDate3.format(mDate);
+            getTime4 = simpleDate4.format(mDate);
+
         }
         else {
             getTime = now.substring(9, 11) + "00";
+            getTime1 = now.substring(9, 11) + "02";
+            getTime2 = now.substring(9, 11) + "04";
+            getTime3 = now.substring(9, 11) + "06";
+            getTime4 = now.substring(9, 11) + "08";
+
+//         if (min >= 30) {
+//             Date mDate = new Date(System.currentTimeMillis());
+//             SimpleDateFormat simpleDate = new SimpleDateFormat("HH00");
+//             getTime = simpleDate.format(mDate);
+//         }
+//         else {
+//             getTime = now.substring(9, 11) + "00";
         }
 
         System.out.println(getDate);
         System.out.println(getTime);
 
-        Thread thread = new Thread() {
+        System.out.println(getTime1);
+        System.out.println(getTime2);
+        System.out.println(getTime3);
+        System.out.println(getTime4);
 
+
+        //최저기온 정수형 변환
+        float low_number;
+        //최고기온 정수형 변환
+        float high_number;
+
+        weatherLow =  WeatherApi.getWeatherData(getDate, "HH03");
+        weatherHigh =  WeatherApi.getWeatherData(getDate, "HH14");
+
+        //문자형을 정수형으로 바꿔준다.
+        low_number = Float.parseFloat(weatherLow);
+        high_number = Float.parseFloat(weatherHigh);
+
+//        if((high_number - low_number) >= 10)
+//        {
+//            weather_text5.setText("일교차가 큽니다.");
+//        }
+//        else
+//        {
+//            weather_text5.setText(" ");
+//        }
+
+        Log.i("low_number", String.valueOf(low_number));
+
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!isInterrupted()) {
 
-                   weather_data = WeatherApi.getWeatherData(getDate, getTime);
+                weather_data = WeatherApi.getWeatherData(getDate, getTime);
+                weather_data1 = WeatherApi.getWeatherData(getDate, getTime1);
+                weather_data2 = WeatherApi.getWeatherData(getDate, getTime2);
+                weather_data3 = WeatherApi.getWeatherData(getDate, getTime3);
+                weather_data4 = WeatherApi.getWeatherData(getDate, getTime4);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Calendar calendar = Calendar.getInstance(); // 날짜 변수
+                weather_text1 = findViewById(R.id.txtBeforeCelsius1);
+                weather_text2 = findViewById(R.id.txtBeforeCelsius2);
+                weather_text3 = findViewById(R.id.txtBeforeCelsius3);
+                weather_text4 = findViewById(R.id.txtBeforeCelsius4);
+                //최고 최저 텍스트 출력 및 날씨 정보 출력
 
-                            int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
-                            if (hour == 12) {
-                                timer.setText("현재 시각\n" + "오후 12시 ");
-                            } else if (hour == 0) {
-                                timer.setText("현재 시각\n" + "오전 12시 ");
-                            } else if (hour >= 13) {
-                                timer.setText("현재 시각\n" + "오후 " + (hour - 12) + "시 ");
-                            } else {
-                                timer.setText("현재 시각\n" + "오전 " + hour + "시 ");
-                            }
 
-                            // 2시간뒤 시각
-                            if (hour <= 9) {
-                                time1.setText("오전 " + (hour + 2) + "시");
-                            } else if (hour == 10) {
-                                time1.setText("오후 " + 12 + "시");
-                            } else if (hour == 22) {
-                                time1.setText("오전 " + 12 + "시");
-                            } else if (hour >= 23) {
-                                time1.setText("오전 " + (hour - 22) + "시");
-                            } else {
-                                time1.setText("오후 " + (hour - 10) + "시");
-                            }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                            // 4시간 뒤 시간
-                            if (hour <= 7) {
-                                time2.setText("오전 " + (hour + 4) + "시");
-                            } else if (hour == 8) {
-                                time2.setText("오후 " + 12 + "시");
-                            } else if (hour == 20) {
-                                time2.setText("오전 " + 12 + "시");
-                            } else if (hour >= 21) {
-                                time2.setText("오전 " + (hour - 20) + "시");
-                            } else {
-                                time2.setText("오후 " + (hour - 8) + "시");
+                        Calendar calendar = Calendar.getInstance(); // 날짜 변수
 
-                            }
+                        int hour = calendar.get(Calendar.HOUR_OF_DAY); // 시
 
-                            //6시간 뒤 시각
-                            if (hour <= 5) {
-                                time3.setText("오전 " + (hour + 6) + "시");
-                            } else if (hour == 6) {
-                                time3.setText("오후 " + 12 + "시");
-                            } else if (hour == 18) {
-                                time3.setText("오전 " + 12 + "시");
-                            } else if (hour >= 19) {
-                                time3.setText("오전 " + (hour - 18) + "시");
-                            } else {
-                                time3.setText("오후 " + (hour - 6) + "시");
-                            }
-
-                            // 8시간 뒤 시각
-                            if (hour <= 3) {
-                                time4.setText("오전 " + (hour + 8) + "시");
-                            } else if (hour == 4) {
-                                time4.setText("오후 " + 12 + "시");
-                            } else if (hour == 16) {
-                                time4.setText("오전 " + 12 + "시");
-                            } else if (hour >= 17) {
-                                time4.setText("오전 " + (hour - 16) + "시");
-                            } else {
-                                time4.setText("오후 " + (hour - 4) + "시");
-                            }
-
-                            weather_text.setText(weather_data + "°C");
+                        // 현재 시각
+                        if (hour == 12) {
+                            timer.setText("현재 시각\n" + "오후 12시 ");
+                        } else if (hour == 0) {
+                            timer.setText("현재 시각\n" + "오전 12시 ");
+                        } else if (hour >= 13) {
+                            timer.setText("현재 시각\n" + "오후 " + (hour - 12) + "시 ");
+                        } else {
+                            timer.setText("현재 시각\n" + "오전 " + hour + "시 ");
                         }
-                    });
-                }
+
+                        // 2시간뒤 시각
+                        if (hour <= 9) {
+                            time1.setText("오전 " + (hour + 2) + "시");
+                        } else if (hour == 10) {
+                            time1.setText("오후 " + 12 + "시");
+                        } else if (hour == 22) {
+                            time1.setText("오전 " + 12 + "시");
+                        } else if (hour >= 23) {
+                            time1.setText("오전 " + (hour - 22) + "시");
+                        } else {
+                            time1.setText("오후 " + (hour - 10) + "시");
+                        }
+
+                        // 4시간 뒤 시간
+                        if (hour <= 7) {
+                            time2.setText("오전 " + (hour + 4) + "시");
+                        } else if (hour == 8) {
+                            time2.setText("오후 " + 12 + "시");
+                        } else if (hour == 20) {
+                            time2.setText("오전 " + 12 + "시");
+                        } else if (hour >= 21) {
+                            time2.setText("오전 " + (hour - 20) + "시");
+                        } else {
+                            time2.setText("오후 " + (hour - 8) + "시");
+
+                        }
+
+                        //6시간 뒤 시각
+                        if (hour <= 5) {
+                            time3.setText("오전 " + (hour + 6) + "시");
+                        } else if (hour == 6) {
+                            time3.setText("오후 " + 12 + "시");
+                        } else if (hour == 18) {
+                            time3.setText("오전 " + 12 + "시");
+                        } else if (hour >= 19) {
+                            time3.setText("오전 " + (hour - 18) + "시");
+                        } else {
+                            time3.setText("오후 " + (hour - 6) + "시");
+                        }
+
+                        // 8시간 뒤 시각
+                        if (hour <= 3) {
+                            time4.setText("오전 " + (hour + 8) + "시");
+                        } else if (hour == 4) {
+                            time4.setText("오후 " + 12 + "시");
+                        } else if (hour == 16) {
+                            time4.setText("오전 " + 12 + "시");
+                        } else if (hour >= 17) {
+                            time4.setText("오전 " + (hour - 16) + "시");
+                        } else {
+                            time4.setText("오후 " + (hour - 4) + "시");
+                        }
+
+                        weather_text.setText(weather_data + "°C");
+                        weather_text1.setText(weather_data1 + "°C");
+                        weather_text2.setText(weather_data2 + "°C");
+                        weather_text3.setText(weather_data3 + "°C");
+                        weather_text4.setText(weather_data4 + "°C");
+
+
+                    }
+                });
+
+            }
+        }).start();
+
+        // 옷차림 추천
+        recommendGarment(currentCel);
+
+        // 옷차림 추천 새로고침
+        final ImageButton btnRefresh = findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recommendGarment(currentCel);
             }
         };
         thread.start();
@@ -393,4 +546,5 @@ public class RecommendActivity extends AppCompatActivity {
             }
         });
     }
+
 }
