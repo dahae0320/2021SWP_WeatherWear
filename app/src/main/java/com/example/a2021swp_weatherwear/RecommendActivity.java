@@ -62,6 +62,7 @@ public class RecommendActivity extends AppCompatActivity {
     private int currentCel = 22; // 현재 기온 변수 (임의로 지정함)
     private FirebaseDatabase firebaseDatabase, firebaseDatabaseLike, firebaseDatabaseUser;
     private DatabaseReference databaseReference, databaseReferenceLike, databaseReferenceUser;
+
     private TextView txtOuter, txtTop, txtBottom;
 
     private String strNick;
@@ -200,6 +201,7 @@ public class RecommendActivity extends AppCompatActivity {
         System.out.println(getDate);
         System.out.println(getTime);
 
+        // demo
         System.out.println(getTime1);
         System.out.println(getTime2);
         System.out.println(getTime3);
@@ -233,6 +235,7 @@ public class RecommendActivity extends AppCompatActivity {
             public void run() {
 
                 weather_data = WeatherApi.getWeatherData(getDate, getTime);
+
                 weather_data1 = WeatherApi.getWeatherData(getDate, getTime1);
                 weather_data2 = WeatherApi.getWeatherData(getDate, getTime2);
                 weather_data3 = WeatherApi.getWeatherData(getDate, getTime3);
@@ -242,7 +245,11 @@ public class RecommendActivity extends AppCompatActivity {
                 weather_text2 = findViewById(R.id.txtBeforeCelsius2);
                 weather_text3 = findViewById(R.id.txtBeforeCelsius3);
                 weather_text4 = findViewById(R.id.txtBeforeCelsius4);
-                //최고 최저 텍스트 출력 및 날씨 정보 출력
+
+              // master
+                currentCel = Double.parseDouble(weather_data);
+                System.out.println(currentCel);
+
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -317,13 +324,13 @@ public class RecommendActivity extends AppCompatActivity {
                         }
 
                         weather_text.setText(weather_data + "°C");
+
                         weather_text1.setText(weather_data1 + "°C");
                         weather_text2.setText(weather_data2 + "°C");
                         weather_text3.setText(weather_data3 + "°C");
                         weather_text4.setText(weather_data4 + "°C");
                     }
                 });
-
             }
         }).start();
 
@@ -368,7 +375,7 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     // 옷차림 추천 메소드
-    private void recommendGarment(int currentCel) {
+    private void recommendGarment(double currentCel) {
         ArrayList<Integer> arrayList = new ArrayList<>();
 
         ArrayList<String> outer = new ArrayList<>();
