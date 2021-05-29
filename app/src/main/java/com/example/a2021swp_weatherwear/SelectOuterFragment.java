@@ -33,8 +33,7 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
     private FirebaseDatabase database, databaseAdd;
     private DatabaseReference databaseReference, databaseReferenceAdd;
     private OuterTextAdaptor mAdaptor;
-
-    private long userId;
+    private static String userNick;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,12 +57,13 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
      * @return A new instance of fragment SelectOuterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectOuterFragment newInstance(String param1, String param2) {
+    public static SelectOuterFragment newInstance(String param1, String param2, String nick) {
         SelectOuterFragment fragment = new SelectOuterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        userNick = nick;
         return fragment;
     }
 
@@ -156,7 +156,7 @@ public class SelectOuterFragment extends Fragment implements OuterTextAdaptor.On
         // DB 연결
         databaseAdd = FirebaseDatabase.getInstance();
         // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
-        databaseReferenceAdd = databaseAdd.getReference("User").child("User2").child("Outer");
+        databaseReferenceAdd = databaseAdd.getReference("User").child(userNick).child("Outer");
 
         // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 해야함
         databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
