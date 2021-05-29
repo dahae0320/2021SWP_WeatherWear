@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         // 로그인 성공
                         Intent intent = new Intent(MainActivity.this, RecommendActivity.class);
                         intent.putExtra("name", result.getKakaoAccount().getProfile().getNickname());
-                        //intent.putExtra("profileImg", result.getKakaoAccount().getProfile().getProfileImageUrl());
-                        //intent.putExtra("email", result.getKakaoAccount().getEmail());
+
                         startActivity(intent);
 
                         Toast.makeText(MainActivity.this, "환영합니다!", Toast.LENGTH_SHORT).show();
@@ -122,9 +121,6 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e) {
             Log.e("name not found", e.toString());
         }
-
-
-
     }
 
     @Override
