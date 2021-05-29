@@ -31,9 +31,10 @@ public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.
 
     // Add RecyclerView member
     private RecyclerView recyclerBottomView;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private FirebaseDatabase database, databaseAdd;
+    private DatabaseReference databaseReference, databaseReferenceAdd;
     private BottomTextAdaptor mAdaptor;
+    private static String userNick;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,12 +58,13 @@ public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.
      * @return A new instance of fragment SelectBottomFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectBottomFragment newInstance(String param1, String param2) {
+    public static SelectBottomFragment newInstance(String param1, String param2, String nick) {
         SelectBottomFragment fragment = new SelectBottomFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        userNick = nick;
         return fragment;
     }
 
@@ -120,5 +122,25 @@ public class SelectBottomFragment extends Fragment implements BottomTextAdaptor.
     public void onItemSelected(View v, int position) {
         BottomTextAdaptor.ViewHolder viewHolder = (BottomTextAdaptor.ViewHolder)recyclerBottomView.findViewHolderForAdapterPosition(position);
         Toast.makeText(getActivity(), viewHolder.TxtOuter.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        // DB 연결
+        databaseAdd = FirebaseDatabase.getInstance();
+        // TODO: User2 부분은 실제로 사용자 값으로 넣을 것
+        databaseReferenceAdd = databaseAdd.getReference("User").child(userNick).child("Bottom");
+
+        // TODO: 클릭 시 저장됨, 그러나 재 클릭 시 다시 삭제되도록 할
+        databaseReferenceAdd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String str = viewHolder.TxtOuter.getText().toString();
+                databaseReferenceAdd.child(String.valueOf(position)).setValue(str);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("error : not added ", error.toString());
+            }
+        });
     }
 }
