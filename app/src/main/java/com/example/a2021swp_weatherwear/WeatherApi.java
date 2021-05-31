@@ -22,6 +22,7 @@ public class WeatherApi {
         String nx = "81"; // 위경도임.
         String ny = "75";
 
+
         String queryUrl = endPoint + "getUltraSrtNcst?serviceKey=" + serviceKey
                 + "&pageNo=" + pageNo
                 + "&numOfRows=" + numOfRows
