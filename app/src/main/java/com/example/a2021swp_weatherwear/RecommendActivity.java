@@ -154,125 +154,125 @@ public class RecommendActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                //현재날짜 각 시간별 기온 실수형 변환
-                double clock3;
-                double clock4;
-                double clock5;
-                double clock6;
-                double clock7;
-                double clock8;
-                double clock9;
-                double clock10;
-                double clock11;
-                double clock12;
-                double clock13;
-                double clock14;
-                double clock15;
-                double clock16;
-                double clock17;
-                double clock18;
-                double clock19;
-                double clock20;
-                double clock21;
-                double clock22;
-                double clock23;
-
-                //현재시간 기온 출력
-                String Wclock3;
-                String Wclock4;
-                String Wclock5;
-                String Wclock6;
-                String Wclock7;
-                String Wclock8;
-                String Wclock9;
-                String Wclock10;
-                String Wclock11;
-                String Wclock12;
-                String Wclock13;
-                String Wclock14;
-                String Wclock15;
-                String Wclock16;
-                String Wclock17;
-                String Wclock18;
-                String Wclock19;
-                String Wclock20;
-                String Wclock21;
-                String Wclock22;
-                String Wclock23;
-
-                //현재시간 기온 출력 변수
-                String getTime3am = "0300";
-                String getTime4am = "0400";
-                String getTime5am = "0500";
-                String getTime6am = "0600";
-                String getTime7am = "0700";
-                String getTime8am = "0800";
-                String getTime9am = "0900";
-                String getTime10am = "1000";
-                String getTime11am = "1100";
-                String getTime12pm = "1200";
-                String getTime1pm = "1300";
-                String getTime2pm = "1400";
-                String getTime3pm = "1500";
-                String getTime4pm = "1600";
-                String getTime5pm = "1700";
-                String getTime6pm = "1800";
-                String getTime7pm = "1900";
-                String getTime8pm = "2000";
-                String getTime9pm = "2100";
-                String getTime10pm = "2200";
-                String getTime11pm = "2300";
-
-                //api로 기온 불러오기
-                Wclock3 = WeatherApi.getWeatherData(getDate, getTime3am);
-                Wclock4 = WeatherApi.getWeatherData(getDate, getTime4am);
-                Wclock5 = WeatherApi.getWeatherData(getDate, getTime5am);
-                Wclock6 = WeatherApi.getWeatherData(getDate, getTime6am);
-                Wclock7 = WeatherApi.getWeatherData(getDate, getTime7am);
-                Wclock8 = WeatherApi.getWeatherData(getDate, getTime8am);
-                Wclock9 = WeatherApi.getWeatherData(getDate, getTime9am);
-                Wclock10 = WeatherApi.getWeatherData(getDate, getTime10am);
-                Wclock11 = WeatherApi.getWeatherData(getDate, getTime11am);
-                Wclock12 = WeatherApi.getWeatherData(getDate, getTime12pm);
-                Wclock13 = WeatherApi.getWeatherData(getDate, getTime1pm);
-                Wclock14 = WeatherApi.getWeatherData(getDate, getTime2pm);
-                Wclock15 = WeatherApi.getWeatherData(getDate, getTime3pm);
-                Wclock16 = WeatherApi.getWeatherData(getDate, getTime4pm);
-                Wclock17 = WeatherApi.getWeatherData(getDate, getTime5pm);
-                Wclock18 = WeatherApi.getWeatherData(getDate, getTime6pm);
-                Wclock19 = WeatherApi.getWeatherData(getDate, getTime7pm);
-                Wclock20 = WeatherApi.getWeatherData(getDate, getTime8pm);
-                Wclock21 = WeatherApi.getWeatherData(getDate, getTime9pm);
-                Wclock22 = WeatherApi.getWeatherData(getDate, getTime10pm);
-                Wclock23 = WeatherApi.getWeatherData(getDate, getTime11pm);
-
-                //문자형으로 불러온 기온을 실수형으로 변환
-                clock3 = Double.parseDouble(getTime3am);
-                clock4 = Double.parseDouble(getTime4am);
-                clock5 = Double.parseDouble(getTime5am);
-                clock6 = Double.parseDouble(getTime6am);
-                clock7 = Double.parseDouble(getTime7am);
-                clock8 = Double.parseDouble(getTime8am);
-                clock9 = Double.parseDouble(getTime9am);
-                clock10 = Double.parseDouble(getTime10am);
-                clock11 = Double.parseDouble(getTime11am);
-                clock12 = Double.parseDouble(getTime12pm);
-                clock13 = Double.parseDouble(getTime1pm);
-                clock14 = Double.parseDouble(getTime2pm);
-                clock15 = Double.parseDouble(getTime3pm);
-                clock16 = Double.parseDouble(getTime4pm);
-                clock17 = Double.parseDouble(getTime5pm);
-                clock18 = Double.parseDouble(getTime6pm);
-                clock19 = Double.parseDouble(getTime7pm);
-                clock20 = Double.parseDouble(getTime8pm);
-                clock21 = Double.parseDouble(getTime9pm);
-                clock22 = Double.parseDouble(getTime10pm);
-                clock23 = Double.parseDouble(getTime11pm);
-                
-                //하루 전체 기온 평균
-                double temperatureAverage
-                        = (clock3 + clock4 + clock5 + clock6 + clock7 + clock8 + clock9 + clock10 + clock11 + clock12 + clock13 + clock14
-                        + clock15 + clock16 + clock17 + clock18 + clock19 + clock20 + clock21 + clock22 + clock23)/21;
+//                //현재날짜 각 시간별 기온 실수형 변환
+//                double clock3;
+//                double clock4;
+//                double clock5;
+//                double clock6;
+//                double clock7;
+//                double clock8;
+//                double clock9;
+//                double clock10;
+//                double clock11;
+//                double clock12;
+//                double clock13;
+//                double clock14;
+//                double clock15;
+//                double clock16;
+//                double clock17;
+//                double clock18;
+//                double clock19;
+//                double clock20;
+//                double clock21;
+//                double clock22;
+//                double clock23;
+//
+//                //현재시간 기온 출력
+//                String Wclock3;
+//                String Wclock4;
+//                String Wclock5;
+//                String Wclock6;
+//                String Wclock7;
+//                String Wclock8;
+//                String Wclock9;
+//                String Wclock10;
+//                String Wclock11;
+//                String Wclock12;
+//                String Wclock13;
+//                String Wclock14;
+//                String Wclock15;
+//                String Wclock16;
+//                String Wclock17;
+//                String Wclock18;
+//                String Wclock19;
+//                String Wclock20;
+//                String Wclock21;
+//                String Wclock22;
+//                String Wclock23;
+//
+//                //현재시간 기온 출력 변수
+//                String getTime3am = "0300";
+//                String getTime4am = "0400";
+//                String getTime5am = "0500";
+//                String getTime6am = "0600";
+//                String getTime7am = "0700";
+//                String getTime8am = "0800";
+//                String getTime9am = "0900";
+//                String getTime10am = "1000";
+//                String getTime11am = "1100";
+//                String getTime12pm = "1200";
+//                String getTime1pm = "1300";
+//                String getTime2pm = "1400";
+//                String getTime3pm = "1500";
+//                String getTime4pm = "1600";
+//                String getTime5pm = "1700";
+//                String getTime6pm = "1800";
+//                String getTime7pm = "1900";
+//                String getTime8pm = "2000";
+//                String getTime9pm = "2100";
+//                String getTime10pm = "2200";
+//                String getTime11pm = "2300";
+//
+//                //api로 기온 불러오기
+//                Wclock3 = WeatherApi.getWeatherData(getDate, getTime3am);
+//                Wclock4 = WeatherApi.getWeatherData(getDate, getTime4am);
+//                Wclock5 = WeatherApi.getWeatherData(getDate, getTime5am);
+//                Wclock6 = WeatherApi.getWeatherData(getDate, getTime6am);
+//                Wclock7 = WeatherApi.getWeatherData(getDate, getTime7am);
+//                Wclock8 = WeatherApi.getWeatherData(getDate, getTime8am);
+//                Wclock9 = WeatherApi.getWeatherData(getDate, getTime9am);
+//                Wclock10 = WeatherApi.getWeatherData(getDate, getTime10am);
+//                Wclock11 = WeatherApi.getWeatherData(getDate, getTime11am);
+//                Wclock12 = WeatherApi.getWeatherData(getDate, getTime12pm);
+//                Wclock13 = WeatherApi.getWeatherData(getDate, getTime1pm);
+//                Wclock14 = WeatherApi.getWeatherData(getDate, getTime2pm);
+//                Wclock15 = WeatherApi.getWeatherData(getDate, getTime3pm);
+//                Wclock16 = WeatherApi.getWeatherData(getDate, getTime4pm);
+//                Wclock17 = WeatherApi.getWeatherData(getDate, getTime5pm);
+//                Wclock18 = WeatherApi.getWeatherData(getDate, getTime6pm);
+//                Wclock19 = WeatherApi.getWeatherData(getDate, getTime7pm);
+//                Wclock20 = WeatherApi.getWeatherData(getDate, getTime8pm);
+//                Wclock21 = WeatherApi.getWeatherData(getDate, getTime9pm);
+//                Wclock22 = WeatherApi.getWeatherData(getDate, getTime10pm);
+//                Wclock23 = WeatherApi.getWeatherData(getDate, getTime11pm);
+//
+//                //문자형으로 불러온 기온을 실수형으로 변환
+//                clock3 = Double.parseDouble(getTime3am);
+//                clock4 = Double.parseDouble(getTime4am);
+//                clock5 = Double.parseDouble(getTime5am);
+//                clock6 = Double.parseDouble(getTime6am);
+//                clock7 = Double.parseDouble(getTime7am);
+//                clock8 = Double.parseDouble(getTime8am);
+//                clock9 = Double.parseDouble(getTime9am);
+//                clock10 = Double.parseDouble(getTime10am);
+//                clock11 = Double.parseDouble(getTime11am);
+//                clock12 = Double.parseDouble(getTime12pm);
+//                clock13 = Double.parseDouble(getTime1pm);
+//                clock14 = Double.parseDouble(getTime2pm);
+//                clock15 = Double.parseDouble(getTime3pm);
+//                clock16 = Double.parseDouble(getTime4pm);
+//                clock17 = Double.parseDouble(getTime5pm);
+//                clock18 = Double.parseDouble(getTime6pm);
+//                clock19 = Double.parseDouble(getTime7pm);
+//                clock20 = Double.parseDouble(getTime8pm);
+//                clock21 = Double.parseDouble(getTime9pm);
+//                clock22 = Double.parseDouble(getTime10pm);
+//                clock23 = Double.parseDouble(getTime11pm);
+//
+//                //하루 전체 기온 평균
+//                double temperatureAverage
+//                        = (clock3 + clock4 + clock5 + clock6 + clock7 + clock8 + clock9 + clock10 + clock11 + clock12 + clock13 + clock14
+//                        + clock15 + clock16 + clock17 + clock18 + clock19 + clock20 + clock21 + clock22 + clock23)/21;
 
 
                 weather_data = WeatherApi.getWeatherData(getDate, getTime);
