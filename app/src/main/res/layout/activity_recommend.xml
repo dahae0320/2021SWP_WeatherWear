@@ -201,7 +201,7 @@
             android:background="#80FFEB3B"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="우산을 챙기세요!!"
+            android:text=""
             android:textAlignment="center"
             android:textColorHighlight="#B62A2A"
             android:textSize="20sp" />
