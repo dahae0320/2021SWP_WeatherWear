@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +34,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ISessionCallback mSessionCallback;
     TextView tv;
     ImageView iv;
+    private EditText txtName;
+    private Button btnName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         iv = findViewById(R.id.iv);
         tv = findViewById(R.id.tv);
+
+        txtName = findViewById(R.id.txtName);
+        btnName = findViewById(R.id.btnStart);
 
         //뷰에 애니메이션 적용
         Animation ani1 = AnimationUtils.loadAnimation(this,R.anim.bounce);
@@ -57,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+                findViewById(R.id.txtName).setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -64,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 카카오 로그인.
         mSessionCallback = new ISessionCallback() {
             @Override
             public void onSessionOpened() {
@@ -104,6 +116,35 @@ public class MainActivity extends AppCompatActivity {
         Session.getCurrentSession().checkAndImplicitOpen();
 
         getAppKeyHash();
+
+
+        // 이름 입력으로 접속하기.
+        txtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    btnName.setClickable(true);
+                    btnName.setBackgroundColor(Color.YELLOW);
+                    btnName.setTextColor(Color.BLACK);
+                } else {
+                    btnName.setClickable(false);
+                    btnName.setBackgroundColor(Color.GRAY);
+                }
+            }
+        });
+
+        btnName.setOnClickListener(this);
+
     }
 
 
@@ -137,5 +178,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCustomToggleClick(View view) {
         Toast.makeText(this, "CustomToggle", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, RecommendActivity.class);
+        intent.putExtra("name",txtName.getText().toString());
+        startActivity(intent);
+        finish();
     }
 }
