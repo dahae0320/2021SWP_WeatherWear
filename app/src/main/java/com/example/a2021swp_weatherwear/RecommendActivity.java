@@ -374,11 +374,9 @@ public class RecommendActivity extends AppCompatActivity {
     // 옷차림 추천 메소드
     private void recommendGarment(double currentCel) {
         ArrayList<Integer> arrayList = new ArrayList<>();
-
         ArrayList<String> outer = new ArrayList<>();
         ArrayList<String> top = new ArrayList<>();
         ArrayList<String> bottom = new ArrayList<>();
-
         ArrayList<String> userOuter = new ArrayList<>();
         ArrayList<String> userTop = new ArrayList<>();
         ArrayList<String> userBottom = new ArrayList<>();
@@ -419,19 +417,16 @@ public class RecommendActivity extends AppCompatActivity {
 
                 // 현재 기온에 맞는 추천 옷차림을 따로 배열에 할당, 사용자가 가지지 않은 옷이면 배열에 저장되지 않음
                 for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Outer").getChildren() ) {
-//                    System.out.println(dataSnapshot.getValue());
                     if (userOuter.contains(dataSnapshot.getValue().toString())) {
                         outer.add((String) dataSnapshot.getValue());
                     }
                 }
                 for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Top").getChildren() ) {
-//                    System.out.println(dataSnapshot.getValue());
                     if (userTop.contains(dataSnapshot.getValue().toString())) {
                         top.add((String) dataSnapshot.getValue());
                     }
                 }
                 for(DataSnapshot dataSnapshot : snapshot.child(String.valueOf(arrayList.get(current[0]))).child("Bottom").getChildren() ) {
-//                    System.out.println(dataSnapshot.getValue());
                     if (userBottom.contains(dataSnapshot.getValue().toString())) {
                         bottom.add((String) dataSnapshot.getValue());
                     }
