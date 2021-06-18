@@ -177,7 +177,6 @@ public class RecommendActivity extends AppCompatActivity {
             getTime2 = simpleDate2.format(mDate);
             getTime3 = simpleDate3.format(mDate);
             getTime4 = simpleDate4.format(mDate);
-
         }
         else {
             getTime = now.substring(9, 11) + "00";
@@ -185,14 +184,6 @@ public class RecommendActivity extends AppCompatActivity {
             getTime2 = now.substring(9, 11) + "04";
             getTime3 = now.substring(9, 11) + "06";
             getTime4 = now.substring(9, 11) + "08";
-
-//         if (min >= 30) {
-//             Date mDate = new Date(System.currentTimeMillis());
-//             SimpleDateFormat simpleDate = new SimpleDateFormat("HH00");
-//             getTime = simpleDate.format(mDate);
-//         }
-//         else {
-//             getTime = now.substring(9, 11) + "00";
         }
 
         System.out.println(getDate);
@@ -211,21 +202,6 @@ public class RecommendActivity extends AppCompatActivity {
 
         weatherLow =  WeatherApi.getWeatherData(getDate, "HH03");
         weatherHigh =  WeatherApi.getWeatherData(getDate, "HH14");
-
-        //문자형을 정수형으로 바꿔준다.
-//        low_number = Float.parseFloat(weatherLow);
-//        high_number = Float.parseFloat(weatherHigh);
-
-//        if((high_number - low_number) >= 10)
-//        {
-//            weather_text5.setText("일교차가 큽니다.");
-//        }
-//        else
-//        {
-//            weather_text5.setText(" ");
-//        }
-
-//        Log.i("low_number", String.valueOf(low_number));
 
         new Thread(new Runnable() {
             @Override

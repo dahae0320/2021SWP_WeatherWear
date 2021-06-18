@@ -53,6 +53,7 @@ public class SelectActivity extends AppCompatActivity {
         code = "";
         Log.e(TAG, code);
 
+        // 각각의 Outer, Top, Bottom의 fragment 객체를 만든다.
         Fragment frag1 = new SelectOuterFragment().newInstance(code, "", userNick);
         Fragment frag2 = new SelectTopFragment().newInstance(code, "", userNick);
         Fragment frag3 = new SelectBottomFragment().newInstance(code, "", userNick);
@@ -60,14 +61,16 @@ public class SelectActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
+        // 각각의 fragment들을 하나의 ViewPageAdaptor 어댑터에 넣음.
         myPagerAdapter = new ViewPageAdaptor(this);
         myPagerAdapter.addFrag(frag1);
         myPagerAdapter.addFrag(frag2);
         myPagerAdapter.addFrag(frag3);
 
+        // fragment 어댑터를 화면에 세팅함. 각각의 fragment가 select 화면에 보여짐.
         mViewPager.setAdapter(myPagerAdapter);
 
-        //displaying tabs
+        // 탭 버튼을 디스플레이함.
         new TabLayoutMediator(tabLayout, mViewPager, (tab, position) -> tab.setText(titles[position])).attach();
 
         findViewById(R.id.btnLogout).setOnClickListener(new View.OnClickListener() {

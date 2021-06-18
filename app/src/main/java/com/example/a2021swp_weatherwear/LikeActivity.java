@@ -47,15 +47,15 @@ public class LikeActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        mRecyclerView = findViewById(R.id.recyclerViewLike);
-
         // 리사이클러뷰에 RecyclerLikeAdaptor 객체 지정.
-        mAdapter = new RecyclerLikeAdaptor(mList) ;
+        mRecyclerView = findViewById(R.id.recyclerViewLike);
+        mAdapter = new RecyclerLikeAdaptor(mList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         ArrayList<RecyclerLikeItem> list = new ArrayList<>();
 
+        // 데이터 베이스 연결.
         firebaseDatabase = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference = firebaseDatabase.getReference("User"); // DB 테이블 연결
 
@@ -64,8 +64,10 @@ public class LikeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 list.clear(); // 기존 배열리스트가 존재하지않게 초기화
-                // TODO : User2는 실제 사용자 이름으로 넣을
-                for (DataSnapshot snapshot : dataSnapshot.child(userNick).child("Like").getChildren()) { // 반복문으로 데이터 list 를 추출해냄
+
+                // 반복문으로 데이터 list 를 추출해냄
+                for (DataSnapshot snapshot : dataSnapshot.child(userNick).child("Like").getChildren()) {
+                    // addItem 메소드를 이용하여 좋아요 화면에 표시되는 데이터들(그림, 텍스트)을 한번에 추가
                     addItem(getDrawable(R.drawable.hanger), getDrawable(R.drawable.hanger), getDrawable(R.drawable.hanger),
                             snapshot.child("outer").getValue().toString(),
                             snapshot.child("top").getValue().toString(),
@@ -80,11 +82,9 @@ public class LikeActivity extends AppCompatActivity {
                 Log.e("FragLike", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
-
-
-        
     }
 
+    // 좋아요 화면에 표시되는 데이터 묶음을 한번에 추가하기 위한 메소드 (outer, top, bottom의 텍스트와 그림)
     public void addItem(Drawable iconOuter, Drawable iconTop, Drawable iconBottom, String strOuter, String strTop, String strBottom) {
         RecyclerLikeItem item = new RecyclerLikeItem();
 
